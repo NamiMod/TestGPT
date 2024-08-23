@@ -26,9 +26,10 @@ h2 {
 
 p {
     margin-top: -10px;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
     color: #030136;
     font-size: 18px;
+    text-align: justify;
 }
   
   .container {
@@ -73,6 +74,12 @@ p {
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    font-size: larger;
+    background: rgba(255, 255, 255, 0.76);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(3.8px);
+    -webkit-backdrop-filter: blur(3.8px);
+    border: 1px solid rgba(255, 255, 255, 0.46);
 }
 
 /* Button styles */
@@ -86,10 +93,11 @@ p {
     width: 30%;
     border-radius: 5px;
     cursor: pointer;
+    font-size: large;
 }
 
 .submit-button:hover {
-    background-color: #0056b3;
+    background-color: #01448b;
 }
 
 /* Right section with the textarea */
