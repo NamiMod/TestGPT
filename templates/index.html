@@ -3,23 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TestBrain</title>
+    <title>TestGPT</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <h1>TestBrain - Test Generation By LLM</h1>
+    <h1>TestGPT - Test Generation By LLM</h1>
     <div class="container">
         <div class="left">
             <h2>How Does it Work?</h2>
             <p>Basically, you need to write a prompt. Based on the prompt you provide and the project you add, our test generator will automatically analyze the objects in your scene and try to write a test using the Arium Framework for the situation you described.
             </p>
-            <form action="/submit" method="POST">
+            <form action="/submit" method="POST" enctype="multipart/form-data">
+                <p>Please select your YAML file (Scene file) of your project, and then you can write a prompt to generate and test your selected scene with the inserted prompt.</p>
+                <input type="file" name="file" class="file-input">
+                <br/>
+
                 <input type="text" placeholder="Enter Your Prompt" class="text-input" name="prompt">
                 <button class="submit-button">Generate Test</button>
             </form>
         </div>
         <div class="right">
-            <textarea class="text-area" readonly></textarea>
+            <textarea class="text-area code-area" readonly>{{ result }}</textarea>  <!-- Populate the textarea with the result -->
         </div>
     </div>
 </body>

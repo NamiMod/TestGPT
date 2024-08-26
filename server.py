@@ -3,13 +3,12 @@ from openai import OpenAI
 
 client = OpenAI(api_key="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")
 
-# Set up your OpenAI API key
 
 app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('index.html', result="")  # Pass an empty result initially
 
 @app.route('/submit', methods=['POST'])
 def submit():
@@ -26,7 +25,8 @@ def submit():
     # Extract the assistant's response
     result = response.choices[0].message.content
 
-    return f'Result: {result}'
+    # Render the template and pass the result to the textarea
+    return render_template('index.html', result=result)
 
 if __name__ == '__main__':
     app.run(debug=True)
