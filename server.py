@@ -2,13 +2,13 @@ from flask import Flask, render_template, request
 from openai import OpenAI
 
 client = OpenAI(api_key="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")
-
+username = ""
 
 app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return render_template('index.html', result="")  # Pass an empty result initially
+    return render_template('index.html', result="")
 
 @app.route('/submit', methods=['POST'])
 def submit():
