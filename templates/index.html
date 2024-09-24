@@ -8,26 +8,37 @@
 </head>
 <body>
     <div class="container">
+        <!-- Sidebar -->
         <aside class="sidebar">
             <div class="logo">
                 <h1>TestGPT</h1>
             </div>
-            <nav class="menu" style="margin-top: -500px;">
+
+            <nav class="menu">
                 <ul>
-                    <li><a href="#">Setting</a></li>
-                    <li><a href="#">Help</a></li>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Logout</a></li>
+                    <li><a href="#" class="menu-item" data-popup="help">Help</a></li>
+                    <li><a href="#" class="menu-item" data-popup="settings">Settings</a></li>
+                    <li><a href="#" class="menu-item" data-popup="about">About Us</a></li>
+                    <li>
+                        <!-- Light/Dark Mode Toggle with Emoji -->
+                        <span id="theme-emoji">🌙</span>
+                        <label class="theme-toggle">
+                            <input type="checkbox" id="theme-toggle-checkbox">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </li>
                 </ul>
             </nav>
+
             <div class="profile-card">
                 <div class="profile">
                     <img src="../static/ai_2814666.png" alt="Profile Picture">
-                    <p>Version 0.2</p>
+                    <p>Version 0.3</p>
                 </div>
             </div>
         </aside>
 
+        <!-- Main Content -->
         <main class="content">
             <div class="card">
                 <div class="card-header">
@@ -36,32 +47,98 @@
                     <p>Demographics: 5 lines</p>
                 </div>
                 <div class="card-content">
-                    <!-- <div class="info">
-                        <h3>Personalization</h3>
-                        <p>AI can analyze user data and behavior to create personalized experiences...</p>
-                    </div>
-                    <div class="info">
-                        <h3>User Testing</h3>
-                        <p>AI can simulate user behavior and interactions with a design...</p>
-                    </div>
-                    <div class="info">
-                        <h3>Content Creation</h3>
-                        <p>AI can help generate and optimize content for user interfaces...</p>
-                    </div> -->
+                    <!-- Main content goes here -->
                 </div>
             </div>
 
-            <!-- Search Results Area -->
-            <div id="results-area"></div>
-
-            <!-- Input and button at the bottom -->
+            <!-- Input Section -->
             <div class="input-section">
-                <input type="text" id="search-input" placeholder="Start searching, typing whatever you want">
-                <!-- <input type="file" id="search-input" style="margin-right: 8px; width: 20px;"> -->
+                <input type="text" id="search-input" placeholder="How can I help you?">
                 <button type="button" id="search-button">Send</button>
+                <button type="button" id="upload-button">Upload File</button>
             </div>
         </main>
     </div>
-    <script src="script.js"></script>
+
+    <!-- Pop-up Window -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close">&times;</span>
+            <div id="popup-text"></div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Page Load Animation
+        window.onload = function() {
+            const card = document.querySelector('.card');
+            setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, 100);
+        };
+
+        // Handle Menu Item Clicks
+        document.querySelectorAll('.menu-item').forEach(function(element){
+            element.addEventListener('click', function(e){
+                e.preventDefault();
+                const popup = document.getElementById('popup');
+                const popupText = document.getElementById('popup-text');
+                const popupContent = element.getAttribute('data-popup');
+
+                // Set the content based on which link was clicked
+                if (popupContent === 'help') {
+                    popupText.innerHTML = '<h2>Help</h2><p>This is the help section.</p>';
+                } else if (popupContent === 'settings') {
+                    popupText.innerHTML = '<h2>Settings</h2><p>This is the settings section.</p>';
+                } else if (popupContent === 'about') {
+                    popupText.innerHTML = '<h2>About Us</h2><p>This is the about us section.</p>';
+                }
+
+                // Display the pop-up
+                popup.style.display = 'block';
+            });
+        });
+
+        // Close Pop-up When Clicking on Close Button
+        document.querySelector('.close').addEventListener('click', function(){
+            document.getElementById('popup').style.display = 'none';
+        });
+
+        // Close Pop-up When Clicking Outside the Pop-up Content
+        window.addEventListener('click', function(event){
+            const popup = document.getElementById('popup');
+            if (event.target === popup) {
+                popup.style.display = 'none';
+            }
+        });
+
+        // Theme Toggle Functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            const themeToggleCheckbox = document.getElementById('theme-toggle-checkbox');
+            const themeEmoji = document.getElementById('theme-emoji');
+            
+            // Check saved theme preference on page load
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.body.classList.toggle('light-mode', savedTheme === 'light');
+                themeToggleCheckbox.checked = savedTheme === 'light';
+                themeEmoji.textContent = savedTheme === 'light' ? '🌞' : '🌙';
+            }
+
+            themeToggleCheckbox.addEventListener('change', function () {
+                if (this.checked) {
+                    document.body.classList.add('light-mode');
+                    themeEmoji.textContent = '🌞'; // Change to sun emoji for light mode
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    document.body.classList.remove('light-mode');
+                    themeEmoji.textContent = '🌙'; // Change to moon emoji for dark mode
+                    localStorage.setItem('theme', 'dark');
+                }
+            });
+        });
+    </script>
 </body>
 </html>

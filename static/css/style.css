@@ -39,10 +39,58 @@ body {
   color: #7FFF00;
   font-size: 24px;
   margin-bottom: 20px;
+  text-align: left;
 }
 
+/* Theme Toggle Styles */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px; /* Space below the toggle */
+}
+
+.theme-toggle input {
+  display: none; /* Hide the default checkbox */
+}
+
+.toggle-slider {
+  position: relative;
+  width: 50px;
+  height: 24px;
+  background-color: #707070;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.toggle-slider::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  background-color: #FFFFFF;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+input:checked + .toggle-slider {
+  background-color: #4CD964;
+}
+
+input:checked + .toggle-slider::before {
+  transform: translateX(26px);
+}
+
+/* Menu Styles */
 .menu ul {
   list-style-type: none;
+  text-align: left; /* Centering the list items */
+}
+
+.menu ul li {
+  margin-bottom: 10px; /* Add space between items */
 }
 
 .menu ul li a {
@@ -147,23 +195,6 @@ body {
   padding: 20px 0; /* Optional padding adjustment */
 }
 
-.card-content .info {
-  margin-bottom: 20px;
-  flex: 1; /* Distribute space evenly if needed */
-}
-
-.card-content .info h3 {
-  font-size: 18px;
-  color: #7FFF00;
-  margin-bottom: 5px;
-}
-
-.card-content .info p {
-  font-size: 14px;
-  line-height: 1.6;
-  color: #AAAAAA;
-}
-
 /* Search Results Area */
 #results-area {
   margin-top: 20px;
@@ -230,9 +261,143 @@ body {
   border-radius: 5px;
   font-weight: bold;
   cursor: pointer;
+  margin-right: 5px;
+  margin-left: 5px;
   transition: background-color 0.3s ease;
 }
 
 .input-section button:hover {
   background-color: #428202;
+}
+
+/* Pop-up Styles */
+.popup {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1000; /* Sit on top of everything */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
+}
+
+.popup-content {
+  background-color: #2C2C2C;
+  margin: 10% auto; /* Centered */
+  padding: 20px;
+  border: 1px solid #444;
+  width: 60%; /* Adjust as needed */
+  border-radius: 10px;
+  position: relative;
+  animation: popupFadeIn 0.3s ease;
+}
+
+@keyframes popupFadeIn {
+  from { opacity: 0; transform: translateY(-50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.close {
+  color: #AAAAAA;
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+#popup-text h2 {
+  margin-bottom: 15px;
+}
+
+#popup-text p {
+  line-height: 1.5;
+}
+
+/* Light Mode Styles */
+body.light-mode {
+  background-color: #F3F3F3; /* Slightly darker than white */
+  color: #333333;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.light-mode .sidebar {
+  background-color: #E0E0E0;
+}
+
+.light-mode .logo h1 {
+  color: #006400; /* Darker green */
+}
+
+.light-mode .menu ul li a {
+  color: #333333;
+}
+
+.light-mode .menu ul li a:hover {
+  color: #006400; /* Darker green */
+}
+
+.light-mode .profile-card {
+  background-color: #D0D0D0;
+}
+
+.light-mode .card {
+  background-color: #E0E0E0;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.light-mode .input-section {
+  background-color: #E0E0E0;
+}
+
+.light-mode .input-section input {
+  background-color: #F3F3F3;
+  color: #333333;
+}
+
+.light-mode .input-section input:focus {
+  background-color: #CCCCCC;
+}
+
+.light-mode .input-section button {
+  background-color: #006400; /* Darker green */
+  color: #FFFFFF;
+}
+
+.light-mode .input-section button:hover {
+  background-color: #004d00;
+}
+
+.light-mode .popup-content {
+  background-color: #E0E0E0;
+  color: #333333;
+}
+
+.light-mode .close {
+  color: #555555;
+}
+
+.light-mode .close:hover,
+.light-mode .close:focus {
+  color: #333333;
+}
+
+/* Optional: Smooth transitions for theme changes */
+body,
+.sidebar,
+.menu ul li a,
+.profile-card,
+.card,
+.input-section,
+.popup-content {
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
