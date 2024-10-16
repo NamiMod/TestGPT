@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TestGPT</title>
+    <!-- Font Awesome CDN for Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-pVnHzhb6aGF6A63UVjgKkV9iYvn8e3vVJ3N8j3qVnjbAX+Mx6bX+1p4UujqK3UVb4yBi3+hLQK6jzOvceTf3Yg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
@@ -20,50 +29,56 @@
                     <li><a href="#" class="menu-item" data-popup="settings">Settings</a></li>
                     <li><a href="#" class="menu-item" data-popup="about">About Us</a></li>
                     <li>
-                        <!-- Light/Dark Mode Toggle with Emoji -->
-                        <span id="theme-emoji">🌙</span>
-                        <label class="theme-toggle">
-                            <input type="checkbox" id="theme-toggle-checkbox">
-                            <span class="toggle-slider"></span>
-                        </label>
+                        <!-- Dark/Light Mode Toggle Button -->
+                        <button id="theme-toggle-button" aria-label="Toggle Dark and Light Mode">
+                            <i class="fas fa-moon"></i> Dark Mode
+                        </button>
                     </li>
                 </ul>
             </nav>
 
             <div class="profile-card">
                 <div class="profile">
-                    <img src="../static/ai_2814666.png" alt="Profile Picture">
-                    <p>Version 0.3</p>
+                    <img src="static/ai_2814666.png" alt="Profile Picture">
+                    <p>Version 0.6</p>
                 </div>
             </div>
         </aside>
 
         <!-- Main Content -->
         <main class="content">
-            <div class="card">
-                <div class="card-header">
-                    <h2>Prompt Type: Introduction</h2>
-                    <p>Subject: AI helps in UI/UX design</p>
-                    <p>Demographics: 5 lines</p>
-                </div>
-                <div class="card-content">
-                    <!-- Main content goes here -->
-                </div>
+            <!-- Result Area (Moved and Fixed) -->
+            <div id="results-area" class="results-area">
+                <h3>Result</h3>
+                <hr>
+                <textarea id="result-output" class="result-output" readonly aria-label="Result Output"></textarea>
             </div>
 
             <!-- Input Section -->
             <div class="input-section">
-                <input type="text" id="search-input" placeholder="How can I help you?">
+                <input type="text" id="search-input" placeholder="How can I help you?" aria-label="Search Input">
                 <button type="button" id="search-button">Send</button>
-                <button type="button" id="upload-button">Upload File</button>
+                
+                <!-- Hidden File Input -->
+                <input type="file" id="upload-input" class="file-input" aria-label="Upload File">
+                
+                <!-- Styled Label Acting as Button -->
+                <label for="upload-input" class="upload-button" aria-label="Upload File">
+                    <i class="fas fa-upload"></i> Upload File
+                </label>
+                
+                <!-- New Link to GitHub/GitLab Button -->
+                <button type="button" class="link-button" data-popup="link" aria-label="Link to GitHub or GitLab">
+                    <i class="fas fa-link"></i> Link to GitHub/GitLab
+                </button>
             </div>
         </main>
     </div>
 
     <!-- Pop-up Window -->
-    <div id="popup" class="popup">
+    <div id="popup" class="popup" role="dialog" aria-modal="true" aria-labelledby="popup-title">
         <div class="popup-content">
-            <span class="close">&times;</span>
+            <button class="close" aria-label="Close Pop-up">&times;</button>
             <div id="popup-text"></div>
         </div>
     </div>
@@ -72,38 +87,72 @@
     <script>
         // Page Load Animation
         window.onload = function() {
-            const card = document.querySelector('.card');
+            const resultsArea = document.querySelector('.results-area');
             setTimeout(() => {
-                card.style.opacity = '1';
-                card.style.transform = 'translateY(0)';
+                resultsArea.style.opacity = '1';
+                resultsArea.style.transform = 'translateY(0)';
             }, 100);
         };
 
-        // Handle Menu Item Clicks
-        document.querySelectorAll('.menu-item').forEach(function(element){
+        // Handle All Elements with data-popup Attribute
+        const popupElements = document.querySelectorAll('[data-popup]');
+        popupElements.forEach(function(element){
             element.addEventListener('click', function(e){
                 e.preventDefault();
                 const popup = document.getElementById('popup');
                 const popupText = document.getElementById('popup-text');
-                const popupContent = element.getAttribute('data-popup');
+                const popupType = element.getAttribute('data-popup');
 
-                // Set the content based on which link was clicked
-                if (popupContent === 'help') {
-                    popupText.innerHTML = '<h2>Help</h2><p>This is the help section.</p>';
-                } else if (popupContent === 'settings') {
-                    popupText.innerHTML = '<h2>Settings</h2><p>This is the settings section.</p>';
-                } else if (popupContent === 'about') {
-                    popupText.innerHTML = '<h2>About Us</h2><p>This is the about us section.</p>';
+                // Determine pop-up content based on popupType
+                if (popupType === 'help') {
+                    popupText.innerHTML = '<h2 id="popup-title">Help</h2><p>This is the help section.</p>';
+                } else if (popupType === 'settings') {
+                    popupText.innerHTML = '<h2 id="popup-title">Settings</h2><p>This is the settings section.</p>';
+                } else if (popupType === 'about') {
+                    popupText.innerHTML = '<h2 id="popup-title">About Us</h2><p>This is the about us section.</p>';
+                } else if (popupType === 'link') {
+                    popupText.innerHTML = `
+                        <h2 id="popup-title">Link to GitHub/GitLab</h2>
+                        <form id="link-form">
+                            <label for="github-url">Enter URL:</label>
+                            <input type="url" id="github-url" name="github-url" placeholder="https://github.com/your-repo" required aria-label="GitHub/GitLab URL">
+                            <button type="submit" id="submit-link-button">Submit</button>
+                        </form>
+                    `;
                 }
 
                 // Display the pop-up
                 popup.style.display = 'block';
+                // Disable background scrolling when pop-up is open
+                document.body.style.overflow = 'hidden';
+
+                // If the pop-up is the link form, add event listener to the form
+                if (popupType === 'link') {
+                    const linkForm = document.getElementById('link-form');
+                    linkForm.addEventListener('submit', function(event){
+                        event.preventDefault();
+                        const urlInput = document.getElementById('github-url').value;
+                        alert(`URL Submitted: ${urlInput}`);
+                        // Optionally, close the pop-up after submission
+                        popup.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                        document.getElementById('theme-toggle-button').focus();
+                    });
+                }
+
+                // Focus trapping within the pop-up
+                trapFocus(popup);
             });
         });
 
         // Close Pop-up When Clicking on Close Button
         document.querySelector('.close').addEventListener('click', function(){
-            document.getElementById('popup').style.display = 'none';
+            const popup = document.getElementById('popup');
+            popup.style.display = 'none';
+            // Re-enable background scrolling when pop-up is closed
+            document.body.style.overflow = 'auto';
+            // Return focus to the theme toggle button
+            document.getElementById('theme-toggle-button').focus();
         });
 
         // Close Pop-up When Clicking Outside the Pop-up Content
@@ -111,34 +160,125 @@
             const popup = document.getElementById('popup');
             if (event.target === popup) {
                 popup.style.display = 'none';
+                // Re-enable background scrolling when pop-up is closed
+                document.body.style.overflow = 'auto';
+                // Return focus to the theme toggle button
+                document.getElementById('theme-toggle-button').focus();
             }
         });
 
         // Theme Toggle Functionality
         document.addEventListener('DOMContentLoaded', function () {
-            const themeToggleCheckbox = document.getElementById('theme-toggle-checkbox');
-            const themeEmoji = document.getElementById('theme-emoji');
-            
-            // Check saved theme preference on page load
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme) {
-                document.body.classList.toggle('light-mode', savedTheme === 'light');
-                themeToggleCheckbox.checked = savedTheme === 'light';
-                themeEmoji.textContent = savedTheme === 'light' ? '🌞' : '🌙';
-            }
+            const themeToggleButton = document.getElementById('theme-toggle-button');
+            const themeIcon = themeToggleButton.querySelector('i');
 
-            themeToggleCheckbox.addEventListener('change', function () {
-                if (this.checked) {
+            // Function to update the theme
+            function updateTheme(theme) {
+                if (theme === 'light') {
                     document.body.classList.add('light-mode');
-                    themeEmoji.textContent = '🌞'; // Change to sun emoji for light mode
-                    localStorage.setItem('theme', 'light');
+                    themeIcon.classList.remove('fa-moon');
+                    themeIcon.classList.add('fa-sun');
+                    themeToggleButton.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
                 } else {
                     document.body.classList.remove('light-mode');
-                    themeEmoji.textContent = '🌙'; // Change to moon emoji for dark mode
-                    localStorage.setItem('theme', 'dark');
+                    themeIcon.classList.remove('fa-sun');
+                    themeIcon.classList.add('fa-moon');
+                    themeToggleButton.innerHTML = '<i class="fas fa-moon"></i> Dark Mode';
+                }
+            }
+
+            // Check saved theme preference on page load
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            updateTheme(savedTheme);
+
+            // Event listener for the toggle button
+            themeToggleButton.addEventListener('click', function () {
+                const currentTheme = document.body.classList.contains('light-mode') ? 'light' : 'dark';
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                updateTheme(newTheme);
+                localStorage.setItem('theme', newTheme);
+            });
+
+            // Keyboard accessibility for theme toggle button
+            themeToggleButton.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    themeToggleButton.click();
+                }
+            });
+
+            // Handle file upload input
+            const uploadInput = document.getElementById('upload-input');
+
+            uploadInput.addEventListener('change', function() {
+                const file = this.files[0];
+                if (file) {
+                    // Example: Display the selected file name
+                    alert(`Selected file: ${file.name}`);
+                    // Implement further file handling as needed
+                }
+            });
+
+            // Handle Send Button Click
+            const sendButton = document.getElementById('search-button');
+            const searchInput = document.getElementById('search-input');
+            const resultOutput = document.getElementById('result-output');
+
+            sendButton.addEventListener('click', function(){
+                const userInput = searchInput.value.trim();
+                if(userInput !== "") {
+                    resultOutput.value = userInput;
+                    searchInput.value = "";
+                }
+            });
+
+            // Enable Enter key to submit in search input
+            searchInput.addEventListener('keydown', function(e){
+                if(e.key === 'Enter') {
+                    e.preventDefault();
+                    sendButton.click();
                 }
             });
         });
+
+        // Function to trap focus within a given element
+        function trapFocus(element) {
+            const focusableElementsString = 'a[href], area[href], input:not([disabled]), select:not([disabled]), \
+            textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex="0"], \
+            [contenteditable]';
+            let focusableElements = element.querySelectorAll(focusableElementsString);
+            focusableElements = Array.prototype.slice.call(focusableElements);
+
+            if (focusableElements.length === 0)
+                return;
+
+            let firstTabStop = focusableElements[0];
+            let lastTabStop = focusableElements[focusableElements.length - 1];
+
+            element.addEventListener('keydown', function(e) {
+                if (e.keyCode === 9) { // Tab key
+                    if (e.shiftKey) { // Shift + Tab
+                        if (document.activeElement === firstTabStop) {
+                            e.preventDefault();
+                            lastTabStop.focus();
+                        }
+                    } else { // Tab
+                        if (document.activeElement === lastTabStop) {
+                            e.preventDefault();
+                            firstTabStop.focus();
+                        }
+                    }
+                } else if (e.keyCode === 27) { // Escape key
+                    // Close the pop-up
+                    element.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                    document.getElementById('theme-toggle-button').focus();
+                }
+            });
+
+            // Focus the first focusable element
+            firstTabStop.focus();
+        }
     </script>
 </body>
 </html>

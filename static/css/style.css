@@ -13,6 +13,7 @@ body {
   min-height: 100vh;
   opacity: 0; /* For page load animation */
   animation: fadeIn 1s forwards;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 @keyframes fadeIn {
@@ -33,6 +34,7 @@ body {
   flex-direction: column;
   justify-content: space-between;
   padding: 20px;
+  transition: background-color 0.3s ease;
 }
 
 .logo h1 {
@@ -42,51 +44,48 @@ body {
   text-align: left;
 }
 
-/* Theme Toggle Styles */
-.theme-toggle {
+/* Theme Toggle Button Styles */
+#theme-toggle-button {
   display: flex;
   align-items: center;
-  margin-bottom: 20px; /* Space below the toggle */
-}
-
-.theme-toggle input {
-  display: none; /* Hide the default checkbox */
-}
-
-.toggle-slider {
-  position: relative;
-  width: 50px;
-  height: 24px;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
   background-color: #707070;
-  border-radius: 12px;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  font-size: 16px;
+  font-weight: bold; /* Added to match Send button */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.toggle-slider::before {
-  content: "";
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 20px;
-  height: 20px;
-  background-color: #FFFFFF;
-  border-radius: 50%;
-  transition: transform 0.3s ease;
-}
-
-input:checked + .toggle-slider {
+#theme-toggle-button:hover,
+#theme-toggle-button:focus {
   background-color: #4CD964;
+  outline: none;
 }
 
-input:checked + .toggle-slider::before {
-  transform: translateX(26px);
+#theme-toggle-button:focus {
+  box-shadow: 0 0 0 3px rgba(76, 217, 100, 0.5);
+}
+
+body.light-mode #theme-toggle-button {
+  background-color: #006400; /* Dark Green */
+  color: #FFFFFF;
+}
+
+body.light-mode #theme-toggle-button:hover,
+body.light-mode #theme-toggle-button:focus {
+  background-color: #004d00; /* Darker Green on Hover */
+  color: #FFFFFF;
 }
 
 /* Menu Styles */
 .menu ul {
   list-style-type: none;
-  text-align: left; /* Centering the list items */
+  text-align: left; /* Align the list items to the left */
 }
 
 .menu ul li {
@@ -101,8 +100,10 @@ input:checked + .toggle-slider::before {
   transition: color 0.3s ease;
 }
 
-.menu ul li a:hover {
+.menu ul li a:hover,
+.menu ul li a:focus {
   color: #7FFF00;
+  outline: none;
 }
 
 /* Profile Card at the Bottom Left */
@@ -111,6 +112,7 @@ input:checked + .toggle-slider::before {
   padding: 15px;
   border-radius: 10px;
   text-align: center;
+  transition: background-color 0.3s ease;
 }
 
 .profile img {
@@ -141,8 +143,10 @@ input:checked + .toggle-slider::before {
   transition: background-color 0.3s ease;
 }
 
-.upgrade-btn:hover {
-  background-color: #428202;
+.upgrade-btn:hover,
+.upgrade-btn:focus {
+  background-color: #356d02;
+  outline: none;
 }
 
 /* Main Content Styles */
@@ -154,75 +158,47 @@ input:checked + .toggle-slider::before {
   justify-content: space-between;
 }
 
-.card {
-  background-color: #2C2C2C;
-  border-radius: 10px;
-  padding: 20px;
-  width: 100%; /* Set width to 100% for responsiveness */
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-  transition: transform 0.3s ease;
-  animation: slideIn 0.5s ease forwards; /* Load animation */
-  opacity: 0;
-  transform: translateY(50px);
-}
-
-@keyframes slideIn {
-  to {
-      opacity: 1;
-      transform: translateY(0);
-  }
-}
-
-.card:hover {
-  transform: translateY(-10px);
-}
-
-.card-header {
-  border-bottom: 1px solid #444;
-  padding-bottom: 10px;
-  margin-bottom: 20px;
-}
-
-.card-header h2 {
-  font-size: 22px;
-  margin-bottom: 10px;
-}
-
-.card-content {
-  display: flex;
-  flex-direction: column;
-  width: 100%; /* Ensure full width */
-  padding: 20px 0; /* Optional padding adjustment */
-}
-
-/* Search Results Area */
-#results-area {
-  margin-top: 20px;
+/* Result Area Styles */
+.results-area {
+  margin-top: 0; /* Removed top margin to align with container */
   padding: 15px;
   background-color: #2C2C2C;
   border-radius: 10px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
-  display: none; /* Hidden initially */
+  transition: background-color 0.3s ease, color 0.3s ease;
+  flex-grow: 1; /* Allows the result area to expand and fill available space */
+  display: flex;
+  flex-direction: column;
 }
 
-#results-area .result {
-  padding: 10px 0;
-  border-bottom: 1px solid #444;
-}
-
-#results-area .result:last-child {
-  border-bottom: none;
-}
-
-#results-area .result h4 {
-  font-size: 16px;
+.results-area h3 {
+  margin-bottom: 10px;
   color: #7FFF00;
-  margin-bottom: 5px;
 }
 
-#results-area .result p {
-  font-size: 14px;
-  color: #AAAAAA;
+.results-area hr {
+  border: 0;
+  height: 2px;
+  background: #7FFF00;
+  margin-bottom: 10px;
+}
+
+.result-output {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  border: 1px solid #444;
+  border-radius: 5px;
+  resize: none; /* Prevents resizing */
+  background-color: #1E1E1E;
+  color: #FFFFFF;
+  font-size: 16px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.result-output:focus {
+  background-color: #3B3B3B;
+  outline: none;
 }
 
 /* Input Section at the Bottom */
@@ -234,6 +210,7 @@ input:checked + .toggle-slider::before {
   border-radius: 10px;
   margin-top: 20px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+  transition: background-color 0.3s ease;
 }
 
 .input-section input {
@@ -245,7 +222,7 @@ input:checked + .toggle-slider::before {
   font-size: 16px;
   border-radius: 5px;
   margin-right: 10px;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .input-section input:focus {
@@ -263,11 +240,90 @@ input:checked + .toggle-slider::before {
   cursor: pointer;
   margin-right: 5px;
   margin-left: 5px;
-  transition: background-color 0.3s ease;
+  font-size: 16px;
+  font-weight: bold; /* Added to match Send button */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.input-section button:hover {
+.input-section button:hover,
+.input-section button:focus {
   background-color: #428202;
+  outline: none;
+}
+
+/* Hidden File Input */
+.file-input {
+  display: none;
+}
+
+/* Styled Label Acting as Button */
+.upload-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background-color: #7FFF00; /* Same as other buttons */
+  color: #1E1E1E;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold; /* Added to match Send button */
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-decoration: none; /* Remove underline */
+}
+
+.upload-button:hover,
+.upload-button:focus {
+  background-color: #428202; /* Darker green on hover */
+  color: #FFFFFF;
+  outline: none;
+}
+
+/* Font Awesome Icon Styling */
+.upload-button i {
+  font-size: 18px;
+  transition: transform 0.3s ease;
+}
+
+.upload-button:hover i,
+.upload-button:focus i {
+  transform: rotate(20deg); /* Slight rotation on hover for effect */
+}
+
+/* Link to GitHub/GitLab Button Styles */
+.link-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background-color: #7FFF00; /* Same as other buttons */
+  color: #1E1E1E;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold; /* Added to match Send button */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.link-button:hover,
+.link-button:focus {
+  background-color: #428202; /* Darker green on hover */
+  color: #FFFFFF;
+  outline: none;
+}
+
+.link-button i {
+  font-size: 18px;
+  transition: transform 0.3s ease;
+}
+
+.link-button:hover i,
+.link-button:focus i {
+  transform: rotate(20deg); /* Slight rotation on hover for effect */
 }
 
 /* Pop-up Styles */
@@ -281,17 +337,19 @@ input:checked + .toggle-slider::before {
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
   background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
+  transition: background-color 0.3s ease;
 }
 
 .popup-content {
   background-color: #2C2C2C;
-  margin: 10% auto; /* Centered */
-  padding: 20px;
+  margin: 5% auto; /* Reduced top margin for taller pop-up */
+  padding: 30px; /* Increased padding for taller pop-up */
   border: 1px solid #444;
   width: 60%; /* Adjust as needed */
   border-radius: 10px;
   position: relative;
   animation: popupFadeIn 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 @keyframes popupFadeIn {
@@ -300,6 +358,8 @@ input:checked + .toggle-slider::before {
 }
 
 .close {
+  background: none;
+  border: none;
   color: #AAAAAA;
   position: absolute;
   top: 15px;
@@ -307,12 +367,13 @@ input:checked + .toggle-slider::before {
   font-size: 28px;
   font-weight: bold;
   cursor: pointer;
+  transition: color 0.3s ease;
 }
 
 .close:hover,
 .close:focus {
   color: #FFFFFF;
-  text-decoration: none;
+  outline: none;
 }
 
 #popup-text h2 {
@@ -321,6 +382,62 @@ input:checked + .toggle-slider::before {
 
 #popup-text p {
   line-height: 1.5;
+}
+
+#popup-text form {
+  display: flex;
+  flex-direction: column;
+}
+
+#popup-text form label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+#popup-text form input[type="url"] {
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #444;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#popup-text form input[type="url"]:focus {
+  background-color: #444;
+  outline: none;
+}
+
+/* Submit Button Default Styles */
+#submit-link-button {
+  padding: 10px 20px;
+  background-color: #7FFF00; /* Light Green */
+  color: #1E1E1E;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#submit-link-button:hover,
+#submit-link-button:focus {
+  background-color: #428202; /* Darker Green on Hover */
+  color: #FFFFFF;
+  outline: none;
+}
+
+/* Light Mode Overrides for Submit Button */
+body.light-mode .popup-content #submit-link-button {
+  background-color: #006400; /* Dark Green */
+  color: #FFFFFF;
+}
+
+body.light-mode .popup-content #submit-link-button:hover,
+body.light-mode .popup-content #submit-link-button:focus {
+  background-color: #004d00; /* Even Darker Green on Hover */
+  color: #FFFFFF;
+  outline: none;
 }
 
 /* Light Mode Styles */
@@ -342,7 +459,8 @@ body.light-mode {
   color: #333333;
 }
 
-.light-mode .menu ul li a:hover {
+.light-mode .menu ul li a:hover,
+.light-mode .menu ul li a:focus {
   color: #006400; /* Darker green */
 }
 
@@ -350,9 +468,28 @@ body.light-mode {
   background-color: #D0D0D0;
 }
 
-.light-mode .card {
+.light-mode .results-area {
   background-color: #E0E0E0;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  color: #333333;
+}
+
+.light-mode .results-area h3 {
+  color: #006400;
+}
+
+.light-mode .results-area hr {
+  background: #006400;
+}
+
+.light-mode .result-output {
+  background-color: #F3F3F3;
+  color: #333333;
+  border: 1px solid #444;
+}
+
+.light-mode .result-output:focus {
+  background-color: #CCCCCC;
+  color: #333333;
 }
 
 .light-mode .input-section {
@@ -373,13 +510,49 @@ body.light-mode {
   color: #FFFFFF;
 }
 
-.light-mode .input-section button:hover {
+.light-mode .input-section button:hover,
+.light-mode .input-section button:focus {
   background-color: #004d00;
+  color: #FFFFFF;
+}
+
+.light-mode .upload-button {
+  background-color: #006400; /* Darker green */
+  color: #FFFFFF;
+}
+
+.light-mode .upload-button:hover,
+.light-mode .upload-button:focus {
+  background-color: #004d00;
+  color: #FFFFFF;
+}
+
+.light-mode .link-button {
+  background-color: #006400; /* Darker green */
+  color: #FFFFFF;
+}
+
+.light-mode .link-button:hover,
+.light-mode .link-button:focus {
+  background-color: #004d00;
+  color: #FFFFFF;
 }
 
 .light-mode .popup-content {
   background-color: #E0E0E0;
   color: #333333;
+}
+
+.light-mode .popup-content #submit-link-button {
+  background-color: #006400; /* Dark Green */
+  color: #FFFFFF;
+}
+
+.light-mode .popup-content #submit-link-button:hover,
+.light-mode .popup-content #submit-link-button:focus {
+  background-color: #004d00; /* Darker Green on Hover */
+  color: #FFFFFF;
+  outline: none;
 }
 
 .light-mode .close {
@@ -391,13 +564,98 @@ body.light-mode {
   color: #333333;
 }
 
-/* Optional: Smooth transitions for theme changes */
-body,
-.sidebar,
-.menu ul li a,
-.profile-card,
-.card,
-.input-section,
-.popup-content {
-  transition: background-color 0.3s ease, color 0.3s ease;
+/* Responsive Design */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 200px;
+    padding: 15px;
+  }
+
+  .logo h1 {
+    font-size: 20px;
+  }
+
+  #theme-toggle-button {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  .profile img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .popup-content {
+    width: 80%;
+    margin: 20% auto;
+    padding: 15px;
+  }
+
+  .input-section input {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .input-section button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .upload-button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .link-button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .result-output {
+    height: 120px; /* Adjusted height for smaller screens */
+  }
+}
+
+/* Further Responsive Adjustments for Smaller Screens */
+@media (max-width: 480px) {
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .menu ul {
+    display: flex;
+    gap: 10px;
+  }
+
+  #theme-toggle-button {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .profile-card {
+    display: none; /* Hide profile card on small screens */
+  }
+
+  .popup-content {
+    width: 90%;
+    margin: 30% auto;
+    padding: 10px;
+  }
+
+  .upload-button {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .link-button {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .result-output {
+    height: 100px; /* Further adjusted height for very small screens */
+  }
 }
