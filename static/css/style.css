@@ -211,11 +211,14 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* ======== Added Text Color Change on Hover for Send Button ======== */
 .input-section button:hover,
 .input-section button:focus {
   background-color: #428202;
+  color: #FFFFFF; /* Added to change text color on hover/focus */
   outline: none;
 }
+/* =================================================================== */
 
 /* Hidden File Input */
 .file-input {
@@ -247,7 +250,6 @@ body {
   outline: none;
 }
 
-/* Font Awesome Icon Styling */
 .upload-button i {
   font-size: 18px;
   transition: transform 0.3s ease;
@@ -416,120 +418,120 @@ body.light-mode {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.light-mode .sidebar {
+body.light-mode .sidebar {
   background-color: #E0E0E0;
 }
 
-.light-mode .logo h1 {
+body.light-mode .logo h1 {
   color: #006400; /* Darker green */
 }
 
-.light-mode .menu ul li a {
+body.light-mode .menu ul li a {
   color: #333333; /* Inherit color from light mode */
 }
 
-.light-mode .menu ul li a:hover,
-.light-mode .menu ul li a:focus {
+body.light-mode .menu ul li a:hover,
+body.light-mode .menu ul li a:focus {
   color: #006400; /* Darker green on hover */
 }
 
-.light-mode .profile-card {
+body.light-mode .profile-card {
   background-color: #D0D0D0;
 }
 
-.light-mode .results-area {
+body.light-mode .results-area {
   background-color: #E0E0E0;
   color: #333333;
 }
 
-.light-mode .results-area h3 {
+body.light-mode .results-area h3 {
   color: #006400;
 }
 
-.light-mode .results-area hr {
+body.light-mode .results-area hr {
   background: #006400;
 }
 
-.light-mode .result-output {
+body.light-mode .result-output {
   background-color: #F3F3F3;
   color: #333333;
   border: 1px solid #444;
 }
 
-.light-mode .result-output:focus {
+body.light-mode .result-output:focus {
   background-color: #CCCCCC;
   color: #333333;
 }
 
-.light-mode .input-section {
+body.light-mode .input-section {
   background-color: #E0E0E0;
 }
 
-.light-mode .input-section input {
+body.light-mode .input-section input {
   background-color: #F3F3F3;
   color: #333333;
 }
 
-.light-mode .input-section input:focus {
+body.light-mode .input-section input:focus {
   background-color: #CCCCCC;
 }
 
-.light-mode .input-section button {
+body.light-mode .input-section button {
   background-color: #006400; /* Darker green */
   color: #FFFFFF;
 }
 
-.light-mode .input-section button:hover,
-.light-mode .input-section button:focus {
+body.light-mode .input-section button:hover,
+body.light-mode .input-section button:focus {
   background-color: #004d00;
-  color: #FFFFFF;
+  color: #FFFFFF; /* Ensure text color remains white on hover/focus */
 }
 
-.light-mode .upload-button {
+body.light-mode .upload-button {
   background-color: #006400; /* Darker green */
   color: #FFFFFF;
 }
 
-.light-mode .upload-button:hover,
-.light-mode .upload-button:focus {
+body.light-mode .upload-button:hover,
+body.light-mode .upload-button:focus {
   background-color: #004d00;
   color: #FFFFFF;
 }
 
-.light-mode .link-button {
+body.light-mode .link-button {
   background-color: #006400; /* Darker green */
   color: #FFFFFF;
 }
 
-.light-mode .link-button:hover,
-.light-mode .link-button:focus {
+body.light-mode .link-button:hover,
+body.light-mode .link-button:focus {
   background-color: #004d00;
   color: #FFFFFF;
 }
 
-.light-mode .popup-content {
+body.light-mode .popup-content {
   background-color: #E0E0E0;
   color: #333333;
 }
 
-.light-mode .popup-content #submit-link-button {
+body.light-mode .popup-content #submit-link-button {
   background-color: #006400; /* Dark Green */
   color: #FFFFFF;
 }
 
-.light-mode .popup-content #submit-link-button:hover,
-.light-mode .popup-content #submit-link-button:focus {
+body.light-mode .popup-content #submit-link-button:hover,
+body.light-mode .popup-content #submit-link-button:focus {
   background-color: #004d00; /* Darker Green on Hover */
   color: #FFFFFF;
   outline: none;
 }
 
-.light-mode .close {
+body.light-mode .close {
   color: #555555;
 }
 
-.light-mode .close:hover,
-.light-mode .close:focus {
+body.light-mode .close:hover,
+body.light-mode .close:focus {
   color: #333333;
 }
 
@@ -712,4 +714,27 @@ body.light-mode .popup-button:focus {
     text-align: left; /* Changed from center to left */
     margin-bottom: 20px;
     line-height: 1.5;
+}
+
+/* New Styles for Links in Pop-ups */
+.popup-content a {
+    color: #7FFF00; /* Light Green in Dark Mode */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.popup-content a:hover,
+.popup-content a:focus {
+    color: #9AFF9A; /* Slightly lighter green on hover */
+    outline: none;
+}
+
+body.light-mode .popup-content a {
+    color: #006400; /* Dark Green in Light Mode */
+}
+
+body.light-mode .popup-content a:hover,
+body.light-mode .popup-content a:focus {
+    color: #004d00; /* Darker Green on hover in Light Mode */
+    outline: none;
 }

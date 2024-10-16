@@ -35,7 +35,7 @@
             <div class="profile-card">
                 <div class="profile">
                     <img src="{{ url_for('static', filename='ai_2814666.png') }}" alt="Profile Picture">
-                    <p>Version 0.6</p>
+                    <p>Version 0.8</p>
                 </div>
             </div>
         </aside>
@@ -81,232 +81,243 @@
     <!-- JavaScript -->
     <script>
         // Function to Set Up Theme Toggle Button
-        function setupThemeToggleButton() {
-            const themeToggleButton = document.getElementById('theme-toggle-button');
-            if (!themeToggleButton) return;
-            const themeIcon = themeToggleButton.querySelector('i');
+function setupThemeToggleButton() {
+    const themeToggleButton = document.getElementById('theme-toggle-button');
+    if (!themeToggleButton) return;
+    const themeIcon = themeToggleButton.querySelector('i');
 
-            // Function to update the theme
-            function updateTheme(theme) {
-                if (theme === 'light') {
-                    document.body.classList.add('light-mode');
-                    themeIcon.classList.remove('fa-moon');
-                    themeIcon.classList.add('fa-sun');
-                    themeToggleButton.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
-                } else {
-                    document.body.classList.remove('light-mode');
-                    themeIcon.classList.remove('fa-sun');
-                    themeIcon.classList.add('fa-moon');
-                    themeToggleButton.innerHTML = '<i class="fas fa-moon"></i> Dark Mode';
-                }
-            }
+    // Function to update the theme
+    function updateTheme(theme) {
+        if (theme === 'light') {
+            document.body.classList.add('light-mode');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+            themeToggleButton.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
+        } else {
+            document.body.classList.remove('light-mode');
+            themeIcon.classList.remove('fa-sun');
+            themeIcon.classList.add('fa-moon');
+            themeToggleButton.innerHTML = '<i class="fas fa-moon"></i> Dark Mode';
+        }
+    }
 
-            // Check saved theme preference on page load
-            const savedTheme = localStorage.getItem('theme') || 'dark';
-            updateTheme(savedTheme);
+    // Check saved theme preference on page load
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    updateTheme(savedTheme);
 
-            // Event listener for the toggle button
-            themeToggleButton.addEventListener('click', function () {
-                const currentTheme = document.body.classList.contains('light-mode') ? 'light' : 'dark';
-                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-                updateTheme(newTheme);
-                localStorage.setItem('theme', newTheme);
-            });
+    // Event listener for the toggle button
+    themeToggleButton.addEventListener('click', function () {
+        const currentTheme = document.body.classList.contains('light-mode') ? 'light' : 'dark';
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        updateTheme(newTheme);
+        localStorage.setItem('theme', newTheme);
+    });
 
-            // Keyboard accessibility for theme toggle button
-            themeToggleButton.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    themeToggleButton.click();
-                }
+    // Keyboard accessibility for theme toggle button
+    themeToggleButton.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            themeToggleButton.click();
+        }
+    });
+}
+
+// Page Load Animation
+window.onload = function() {
+    const resultsArea = document.querySelector('.results-area');
+    setTimeout(() => {
+        resultsArea.style.opacity = '1';
+        resultsArea.style.transform = 'translateY(0)';
+    }, 100);
+};
+
+// Handle All Elements with data-popup Attribute
+const popupElements = document.querySelectorAll('[data-popup]');
+popupElements.forEach(function(element){
+    element.addEventListener('click', function(e){
+        e.preventDefault();
+        const popup = document.getElementById('popup');
+        const popupText = document.getElementById('popup-text');
+        const popupType = element.getAttribute('data-popup');
+
+        // Determine pop-up content based on popupType
+        if (popupType === 'help') {
+            popupText.innerHTML = `<h2>Getting Started</h2>
+                <p>Welcome to TestGPT, your intelligent solution for automating test creation based on the Arium test automation framework. Whether you're a developer, QA engineer, or tester, our application simplifies the process of generating comprehensive tests tailored to your specific needs. Begin by uploading a scene file in YAML format or by linking a public repository containing your project’s YAML files. This flexibility ensures that you can seamlessly integrate your existing workflows and data sources with our platform.</p>
+                <br/><br/><br/>
+                <h2>Uploading and Linking Your Scene Files</h2>
+                <p>To get started, navigate to the Upload section of the application. Here, you can select and upload your YAML file. Once uploaded, our system will automatically parse the YAML files to extract detailed information about the objects within your scene. You can also link a public repository instead.</p>
+                <br/><br/><br/>
+                <h2>Describing Test Scenarios and Generating Tests</h2>
+                <p>After successfully uploading your scene files or linking to a public repository, you can type your test description. Here, you can describe the specific scenarios you wish to test, detailing the expected behaviors and outcomes. Our application leverages the power of ChatGPT to analyze both the extracted scene information and your described scenarios to generate robust and meaningful tests.</p>`;
+        } else if (popupType === 'settings') {
+            popupText.innerHTML = `
+                <h2 id="popup-title">Settings</h2>
+                <p>Here you can change your preferences for TestGPT:</p>
+                <table class="settings-table">
+                    <tr>
+                        <td>
+                            <button id="theme-toggle-button" class="popup-button" aria-label="Toggle Dark and Light Mode">
+                                <i class="fas fa-moon"></i> Dark Mode
+                            </button>
+                        </td>
+                        <td>
+                            <button class="popup-button locked-button" aria-label="Disable Arium" disabled>
+                                <i class="fas fa-lock"></i> Disable Arium
+                            </button>
+                        </td>
+                        <td>
+                            <button class="popup-button locked-button" aria-label="Enable Chat History" disabled>
+                                <i class="fas fa-lock"></i> Enable Chat History
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            `;
+            // Set up the theme toggle button within the popup after content is inserted
+            setupThemeToggleButton();
+        } else if (popupType === 'about') {
+            popupText.innerHTML = `<h2>TestGPT</h2>
+                <p>TestGPT has been developed as a Master's Thesis at the <a href="https://www.ucalgary.ca" target="_blank">University of Calgary</a> in 2024 at the <a href="https://seriousxr.ca" target="_blank">SEER Lab</a>. This thesis was initiated with the goal of improving testing for XR applications. To report any bugs or problems with TestGPT or for any other inquiries, please email the developer of TestGPT at <a href="mailto:seyednami.modarressi@ucalgary.ca">seyednami.modarressi@ucalgary.ca</a>.</p>`;
+        } else if (popupType === 'link') {
+            popupText.innerHTML = `
+                <h2 id="popup-title">Link to GitHub/GitLab</h2>
+                <form id="link-form">
+                    <label for="github-url">Enter URL:</label>
+                    <input type="url" id="github-url" name="github-url" placeholder="https://github.com/your-repo" required aria-label="GitHub/GitLab URL">
+                    <button type="submit" id="submit-link-button">Submit</button>
+                </form>
+            `;
+        }
+
+        // Display the pop-up
+        popup.style.display = 'block';
+        // Disable background scrolling when pop-up is open
+        document.body.style.overflow = 'hidden';
+
+        // If the pop-up is the link form, add event listener to the form
+        if (popupType === 'link') {
+            const linkForm = document.getElementById('link-form');
+            linkForm.addEventListener('submit', function(event){
+                event.preventDefault();
+                const urlInput = document.getElementById('github-url').value;
+                alert(`URL Submitted: ${urlInput}`);
+                // Optionally, close the pop-up after submission
+                popup.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                // Adjust focus as needed, e.g., to the settings button
+                // document.getElementById('theme-toggle-button').focus();
             });
         }
 
-        // Page Load Animation
-        window.onload = function() {
-            const resultsArea = document.querySelector('.results-area');
-            setTimeout(() => {
-                resultsArea.style.opacity = '1';
-                resultsArea.style.transform = 'translateY(0)';
-            }, 100);
-        };
+        // Focus trapping within the pop-up
+        trapFocus(popup);
+    });
+});
 
-        // Handle All Elements with data-popup Attribute
-        const popupElements = document.querySelectorAll('[data-popup]');
-        popupElements.forEach(function(element){
-            element.addEventListener('click', function(e){
-                e.preventDefault();
-                const popup = document.getElementById('popup');
-                const popupText = document.getElementById('popup-text');
-                const popupType = element.getAttribute('data-popup');
+// Close Pop-up When Clicking on Close Button
+document.addEventListener('click', function(event){
+    if (event.target.classList.contains('close')) {
+        const popup = document.getElementById('popup');
+        popup.style.display = 'none';
+        // Re-enable background scrolling when pop-up is closed
+        document.body.style.overflow = 'auto';
+        // Return focus to the last focused element or a default element
+        // Implement as needed
+    }
+});
 
-                // Determine pop-up content based on popupType
-                if (popupType === 'help') {
-                    popupText.innerHTML = "<h2>Getting Started</h2><p>Welcome to TestGPT, your intelligent solution for automating test creation based on the Arium test automation framework. Whether you're a developer, QA engineer, or tester, our application simplifies the process of generating comprehensive tests tailored to your specific needs. Begin by uploading a scene file in YAML format or by linking a public repository containing your project’s YAML files. This flexibility ensures that you can seamlessly integrate your existing workflows and data sources with our platform.</p><br/><br/><br/><h2>Uploading and Linking Your Scene Files</h2><p>To get started, navigate to the Upload section of the application. Here, you can select and upload your YAML file. Once uploaded, our system will automatically parse the YAML files to extract detailed information about the objects within your scene. You can also link a public repository instead.</p><br/><br/><br/><h2>Describing Test Scenarios and Generating Tests</h2><p>After successfully uploading your scene files or linking to a public repository, you can type your test description. Here, you can describe the specific scenarios you wish to test, detailing the expected behaviors and outcomes. Our application leverages the power of ChatGPT to analyze both the extracted scene information and your described scenarios to generate robust and meaningful tests.</p>";
-                } else if (popupType === 'settings') {
-                    popupText.innerHTML = `
-                        <h2 id="popup-title">Settings</h2>
-                        <p>Here you can change your preferences for TestGPT:</p>
-                        <table class="settings-table">
-                            <tr>
-                                <td>
-                                    <button id="theme-toggle-button" class="popup-button" aria-label="Toggle Dark and Light Mode">
-                                        <i class="fas fa-moon"></i> Dark Mode
-                                    </button>
-                                </td>
-                                <td>
-                                    <button class="popup-button locked-button" aria-label="Disable Arium" disabled>
-                                        <i class="fas fa-lock"></i> Disable Arium
-                                    </button>
-                                </td>
-                                <td>
-                                    <button class="popup-button locked-button" aria-label="Enable Chat History" disabled>
-                                        <i class="fas fa-lock"></i> Enable Chat History
-                                    </button>
-                                </td>
-                            </tr>
-                        </table>
-                    `;
-                    // Set up the theme toggle button within the popup
-                    setupThemeToggleButton();
-                } else if (popupType === 'about') {
-                    popupText.innerHTML = '<h2 id="popup-title">About Us</h2><p>This is the about us section.</p>';
-                } else if (popupType === 'link') {
-                    popupText.innerHTML = `
-                        <h2 id="popup-title">Link to GitHub/GitLab</h2>
-                        <form id="link-form">
-                            <label for="github-url">Enter URL:</label>
-                            <input type="url" id="github-url" name="github-url" placeholder="https://github.com/your-repo" required aria-label="GitHub/GitLab URL">
-                            <button type="submit" id="submit-link-button">Submit</button>
-                        </form>
-                    `;
+// Close Pop-up When Clicking Outside the Pop-up Content
+window.addEventListener('click', function(event){
+    const popup = document.getElementById('popup');
+    if (event.target === popup) {
+        popup.style.display = 'none';
+        // Re-enable background scrolling when pop-up is closed
+        document.body.style.overflow = 'auto';
+        // Return focus to the last focused element or a default element
+        // Implement as needed
+    }
+});
+
+// Theme Toggle Functionality Initialization on Page Load
+document.addEventListener('DOMContentLoaded', function () {
+    // Initial setup if theme-toggle-button exists on the main page (currently removed)
+    setupThemeToggleButton();
+
+    // Handle file upload input
+    const uploadInput = document.getElementById('upload-input');
+
+    uploadInput.addEventListener('change', function() {
+        const file = this.files[0];
+        if (file) {
+            // Example: Display the selected file name
+            alert(`Selected file: ${file.name}`);
+            // Implement further file handling as needed
+        }
+    });
+
+    // Handle Send Button Click
+    const sendButton = document.getElementById('search-button');
+    const searchInput = document.getElementById('search-input');
+    const resultOutput = document.getElementById('result-output');
+
+    sendButton.addEventListener('click', function(){
+        const userInput = searchInput.value.trim();
+        if(userInput !== "") {
+            resultOutput.value = userInput;
+            searchInput.value = "";
+        }
+    });
+
+    // Enable Enter key to submit in search input
+    searchInput.addEventListener('keydown', function(e){
+        if(e.key === 'Enter') {
+            e.preventDefault();
+            sendButton.click();
+        }
+    });
+});
+
+// Function to trap focus within a given element
+function trapFocus(element) {
+    const focusableElementsString = 'a[href], area[href], input:not([disabled]), select:not([disabled]), \
+    textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex="0"], \
+    [contenteditable]';
+    let focusableElements = element.querySelectorAll(focusableElementsString);
+    focusableElements = Array.prototype.slice.call(focusableElements);
+
+    if (focusableElements.length === 0)
+        return;
+
+    let firstTabStop = focusableElements[0];
+    let lastTabStop = focusableElements[focusableElements.length - 1];
+
+    element.addEventListener('keydown', function(e) {
+        if (e.keyCode === 9) { // Tab key
+            if (e.shiftKey) { // Shift + Tab
+                if (document.activeElement === firstTabStop) {
+                    e.preventDefault();
+                    lastTabStop.focus();
                 }
-
-                // Display the pop-up
-                popup.style.display = 'block';
-                // Disable background scrolling when pop-up is open
-                document.body.style.overflow = 'hidden';
-
-                // If the pop-up is the link form, add event listener to the form
-                if (popupType === 'link') {
-                    const linkForm = document.getElementById('link-form');
-                    linkForm.addEventListener('submit', function(event){
-                        event.preventDefault();
-                        const urlInput = document.getElementById('github-url').value;
-                        alert(`URL Submitted: ${urlInput}`);
-                        // Optionally, close the pop-up after submission
-                        popup.style.display = 'none';
-                        document.body.style.overflow = 'auto';
-                        // Adjust focus as needed, e.g., to the settings button
-                        // document.getElementById('theme-toggle-button').focus();
-                    });
+            } else { // Tab
+                if (document.activeElement === lastTabStop) {
+                    e.preventDefault();
+                    firstTabStop.focus();
                 }
-
-                // Focus trapping within the pop-up
-                trapFocus(popup);
-            });
-        });
-
-        // Close Pop-up When Clicking on Close Button
-        document.querySelector('.close').addEventListener('click', function(){
-            const popup = document.getElementById('popup');
-            popup.style.display = 'none';
-            // Re-enable background scrolling when pop-up is closed
+            }
+        } else if (e.keyCode === 27) { // Escape key
+            // Close the pop-up
+            element.style.display = 'none';
             document.body.style.overflow = 'auto';
             // Return focus to the last focused element or a default element
             // Implement as needed
-        });
-
-        // Close Pop-up When Clicking Outside the Pop-up Content
-        window.addEventListener('click', function(event){
-            const popup = document.getElementById('popup');
-            if (event.target === popup) {
-                popup.style.display = 'none';
-                // Re-enable background scrolling when pop-up is closed
-                document.body.style.overflow = 'auto';
-                // Return focus to the last focused element or a default element
-                // Implement as needed
-            }
-        });
-
-        // Theme Toggle Functionality Initialization on Page Load
-        document.addEventListener('DOMContentLoaded', function () {
-            // Initial setup if theme-toggle-button exists on the main page (currently removed)
-            setupThemeToggleButton();
-
-            // Handle file upload input
-            const uploadInput = document.getElementById('upload-input');
-
-            uploadInput.addEventListener('change', function() {
-                const file = this.files[0];
-                if (file) {
-                    // Example: Display the selected file name
-                    alert(`Selected file: ${file.name}`);
-                    // Implement further file handling as needed
-                }
-            });
-
-            // Handle Send Button Click
-            const sendButton = document.getElementById('search-button');
-            const searchInput = document.getElementById('search-input');
-            const resultOutput = document.getElementById('result-output');
-
-            sendButton.addEventListener('click', function(){
-                const userInput = searchInput.value.trim();
-                if(userInput !== "") {
-                    resultOutput.value = userInput;
-                    searchInput.value = "";
-                }
-            });
-
-            // Enable Enter key to submit in search input
-            searchInput.addEventListener('keydown', function(e){
-                if(e.key === 'Enter') {
-                    e.preventDefault();
-                    sendButton.click();
-                }
-            });
-        });
-
-        // Function to trap focus within a given element
-        function trapFocus(element) {
-            const focusableElementsString = 'a[href], area[href], input:not([disabled]), select:not([disabled]), \
-            textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex="0"], \
-            [contenteditable]';
-            let focusableElements = element.querySelectorAll(focusableElementsString);
-            focusableElements = Array.prototype.slice.call(focusableElements);
-
-            if (focusableElements.length === 0)
-                return;
-
-            let firstTabStop = focusableElements[0];
-            let lastTabStop = focusableElements[focusableElements.length - 1];
-
-            element.addEventListener('keydown', function(e) {
-                if (e.keyCode === 9) { // Tab key
-                    if (e.shiftKey) { // Shift + Tab
-                        if (document.activeElement === firstTabStop) {
-                            e.preventDefault();
-                            lastTabStop.focus();
-                        }
-                    } else { // Tab
-                        if (document.activeElement === lastTabStop) {
-                            e.preventDefault();
-                            firstTabStop.focus();
-                        }
-                    }
-                } else if (e.keyCode === 27) { // Escape key
-                    // Close the pop-up
-                    element.style.display = 'none';
-                    document.body.style.overflow = 'auto';
-                    // Return focus to the last focused element or a default element
-                    // Implement as needed
-                }
-            });
-
-            // Focus the first focusable element
-            firstTabStop.focus();
         }
+    });
+
+    // Focus the first focusable element
+    firstTabStop.focus();
+}
+
     </script>
 </body>
 </html>
