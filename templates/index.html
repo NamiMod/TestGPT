@@ -34,7 +34,7 @@
 
             <div class="profile-card">
                 <div class="profile">
-                    <img src="{{ url_for('static', filename='ai_2814666.png') }}" alt="Profile Picture">
+                    <img src="{{ url_for('static', filename='i1.png') }}" alt="Profile Picture">
                     <p>Version 0.8</p>
                 </div>
             </div>
@@ -143,13 +143,13 @@ popupElements.forEach(function(element){
         // Determine pop-up content based on popupType
         if (popupType === 'help') {
             popupText.innerHTML = `<h2>Getting Started</h2>
-                <p>Welcome to TestGPT, your intelligent solution for automating test creation based on the Arium test automation framework. Whether you're a developer, QA engineer, or tester, our application simplifies the process of generating comprehensive tests tailored to your specific needs. Begin by uploading a scene file in YAML format or by linking a public repository containing your project’s YAML files. This flexibility ensures that you can seamlessly integrate your existing workflows and data sources with our platform.</p>
+                <p style = "text-align: justify;">Welcome to TestGPT, your intelligent solution for automating test creation based on the Arium test automation framework. Whether you're a developer, QA engineer, or tester, our application simplifies the process of generating comprehensive tests tailored to your specific needs. Begin by uploading a scene file in YAML format or by linking a public repository containing your project’s YAML files. This flexibility ensures that you can seamlessly integrate your existing workflows and data sources with our platform.</p>
                 <br/><br/><br/>
                 <h2>Uploading and Linking Your Scene Files</h2>
-                <p>To get started, navigate to the Upload section of the application. Here, you can select and upload your YAML file. Once uploaded, our system will automatically parse the YAML files to extract detailed information about the objects within your scene. You can also link a public repository instead.</p>
+                <p style = "text-align: justify;">To get started, navigate to the Upload section of the application. Here, you can select and upload your YAML file. Once uploaded, our system will automatically parse the YAML files to extract detailed information about the objects within your scene. You can also link a public repository instead.</p>
                 <br/><br/><br/>
                 <h2>Describing Test Scenarios and Generating Tests</h2>
-                <p>After successfully uploading your scene files or linking to a public repository, you can type your test description. Here, you can describe the specific scenarios you wish to test, detailing the expected behaviors and outcomes. Our application leverages the power of ChatGPT to analyze both the extracted scene information and your described scenarios to generate robust and meaningful tests.</p>`;
+                <p style = "text-align: justify;">After successfully uploading your scene files or linking to a public repository, you can type your test description. Here, you can describe the specific scenarios you wish to test, detailing the expected behaviors and outcomes. Our application leverages the power of ChatGPT to analyze both the extracted scene information and your described scenarios to generate robust and meaningful tests.</p>`;
         } else if (popupType === 'settings') {
             popupText.innerHTML = `
                 <h2 id="popup-title">Settings</h2>
@@ -178,7 +178,7 @@ popupElements.forEach(function(element){
             setupThemeToggleButton();
         } else if (popupType === 'about') {
             popupText.innerHTML = `<h2>TestGPT</h2>
-                <p>TestGPT has been developed as a Master's Thesis at the <a href="https://www.ucalgary.ca" target="_blank">University of Calgary</a> in 2024 at the <a href="https://seriousxr.ca" target="_blank">SEER Lab</a>. This thesis was initiated with the goal of improving testing for XR applications. To report any bugs or problems with TestGPT or for any other inquiries, please email the developer of TestGPT at <a href="mailto:seyednami.modarressi@ucalgary.ca">seyednami.modarressi@ucalgary.ca</a>.</p>`;
+                <p style = "text-align: justify;">TestGPT has been developed as a Master's Thesis at the <a href="https://www.ucalgary.ca" target="_blank">University of Calgary</a> in 2024 at the <a href="https://seriousxr.ca" target="_blank">SEER Lab</a>. This thesis was initiated with the goal of improving testing for XR applications. To report any bugs or problems with TestGPT or for any other inquiries, please email the developer of TestGPT at <a href="mailto:seyednami.modarressi@ucalgary.ca">seyednami.modarressi@ucalgary.ca</a>.</p>`;
         } else if (popupType === 'link') {
             popupText.innerHTML = `
                 <h2 id="popup-title">Link to GitHub/GitLab</h2>
