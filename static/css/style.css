@@ -33,7 +33,7 @@ body {
   display: flex;
   flex-direction: row;
   width: 100%;
-  height: 100%; /* Added to fill available vertical space */
+  height: 100%; /* Filled available vertical space */
 }
 
 /* Sidebar Styles */
@@ -49,7 +49,7 @@ body {
 
 .logo h1 {
   color: #7FFF00;
-  font-size: 24px;
+  font-size: 24px; /* Reverted from 1.5rem to 24px */
   margin-bottom: 20px;
   text-align: left;
 }
@@ -70,7 +70,7 @@ body {
   display: block;
   padding: 10px 0;
   transition: color 0.3s ease;
-  font-size: 16px; /* Match other text elements */
+  font-size: 16px; /* Reverted from 1rem to 16px */
   font-weight: normal; /* Ensure consistent font weight */
 }
 
@@ -90,25 +90,25 @@ body {
 }
 
 .profile img {
-  width: 60px;
-  height: 60px;
+  width: 60px; /* Reverted from 3.75rem to 60px */
+  height: 60px; /* Reverted from 3.75rem to 60px */
   border-radius: 10px;
   margin-bottom: 10px;
 }
 
 .profile p {
-  font-size: 18px;
+  font-size: 18px; /* Reverted from 1.125rem to 18px */
   margin-bottom: 10px;
 }
 
 .email {
   color: #888;
-  font-size: 14px;
+  font-size: 14px; /* Reverted from 0.875rem to 14px */
   margin-bottom: 10px;
 }
 
 .upgrade-btn {
-  padding: 10px 15px;
+  padding: 10px 15px; /* Reverted from 0.625rem 0.9375rem to 10px 15px */
   background-color: #428202;
   color: #1E1E1E;
   text-decoration: none;
@@ -136,7 +136,6 @@ body {
 .results-area {
   flex: 1 1 auto; /* Allows it to expand and fill available space */
   overflow-y: auto;
-  /* Other existing styles */
   margin-top: 0;
   padding: 15px;
   background-color: #2C2C2C;
@@ -163,22 +162,16 @@ body {
 }
 
 .result-output {
-  /* Remove fixed height to prevent expansion */
   height: auto;
-
-  /* Ensure it takes available space within .results-area */
   flex: 1;
-
   padding: 10px;
   border: 1px solid #444;
   border-radius: 5px;
-  resize: none; /* Prevents resizing */
+  resize: none;
   background-color: #1E1E1E;
   color: #FFFFFF;
-  font-size: 16px;
+  font-size: 16px; /* Reverted from 1rem to 16px */
   transition: background-color 0.3s ease, color 0.3s ease;
-
-  /* Add overflow to handle excessive content */
   overflow-y: auto;
 }
 
@@ -189,8 +182,7 @@ body {
 
 /* Input Section Styles */
 .input-section {
-  flex-shrink: 0; /* Prevents it from shrinking */
-  /* Existing styles */
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   background-color: #2C2C2C;
@@ -199,16 +191,18 @@ body {
   margin-top: 20px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
   transition: background-color 0.3s ease;
+  flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+  gap: 10px; /* Added for consistent spacing between elements */
 }
+
 .input-section input {
-  flex: 1;
-  padding: 10px;
+  flex: 2 1 400px; /* Increased flex-grow to make input wider */
+  padding: 10px; /* Reverted from 0.625rem to 10px */
   background-color: #1E1E1E;
   border: none;
   color: #FFFFFF;
-  font-size: 16px;
+  font-size: 16px; /* Reverted from 1rem to 16px */
   border-radius: 5px;
-  margin-right: 10px;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -218,27 +212,25 @@ body {
 }
 
 .input-section button {
-  padding: 10px 20px;
+  padding: 8px 14px; /* Reduced padding to make Send button smaller */
   background-color: #7FFF00;
   color: #1E1E1E;
   border: none;
   border-radius: 5px;
   font-weight: bold;
   cursor: pointer;
-  margin-right: 5px;
-  margin-left: 5px;
-  font-size: 16px;
+  font-size: 14px; /* Reduced font size */
   transition: background-color 0.3s ease, color 0.3s ease;
+  /* Removed margin: 5px 5px 5px 0; */
+  max-width: 100px; /* Set a max-width to control button size */
 }
 
-/* ======== Added Text Color Change on Hover for Send Button ======== */
 .input-section button:hover,
 .input-section button:focus {
   background-color: #428202;
-  color: #FFFFFF; /* Added to change text color on hover/focus */
+  color: #FFFFFF; /* Change text color on hover/focus */
   outline: none;
 }
-/* =================================================================== */
 
 /* Hidden File Input */
 .file-input {
@@ -251,16 +243,18 @@ body {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 10px 20px;
+  padding: 8px 16px; /* Reduced padding from 10px 20px to 8px 16px */
   background-color: #7FFF00; /* Same as other buttons */
   color: #1E1E1E;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
-  font-weight: bold; /* Added to match Send button */
+  font-size: 16px; /* Reverted from 1rem to 16px */
+  font-weight: bold; /* Match Send button */
   transition: background-color 0.3s ease, color 0.3s ease;
-  text-decoration: none; /* Remove underline */
+  /* Removed margin-left: 10px; */
+  max-width: 150px; /* Optional: Set a max-width */
+  width: 100%; /* Ensures responsiveness */
 }
 
 .upload-button:hover,
@@ -271,7 +265,7 @@ body {
 }
 
 .upload-button i {
-  font-size: 18px;
+  font-size: 18px; /* Reverted from 1.125rem to 18px */
   transition: transform 0.3s ease;
 }
 
@@ -286,15 +280,18 @@ body {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 10px 20px;
+  padding: 8px 16px; /* Reduced padding from 10px 20px to 8px 16px */
   background-color: #7FFF00; /* Same as other buttons */
   color: #1E1E1E;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
-  font-weight: bold; /* Added to match Send button */
+  font-size: 16px; /* Reverted from 1rem to 16px */
+  font-weight: bold; /* Match Send button */
   transition: background-color 0.3s ease, color 0.3s ease;
+  /* Removed margin-left: 10px; */
+  max-width: 150px; /* Optional: Set a max-width */
+  width: 100%; /* Ensures responsiveness */
 }
 
 .link-button:hover,
@@ -305,7 +302,7 @@ body {
 }
 
 .link-button i {
-  font-size: 18px;
+  font-size: 18px; /* Reverted from 1.125rem to 18px */
   transition: transform 0.3s ease;
 }
 
@@ -331,7 +328,7 @@ body {
 .popup-content {
   background-color: #2C2C2C;
   margin: 5% auto; /* Adjusted for better vertical centering */
-  padding: 30px; /* Increased padding for better spacing */
+  padding: 30px; /* Reverted from 2rem to 30px */
   border: 1px solid #444;
   width: 60%; /* Adjust as needed */
   border-radius: 10px;
@@ -350,9 +347,9 @@ body {
   border: none;
   color: #AAAAAA;
   position: absolute;
-  top: 15px;
-  right: 20px;
-  font-size: 28px;
+  top: 15px; /* Reverted from 0.9375rem to 15px */
+  right: 20px; /* Reverted from 1.25rem to 20px */
+  font-size: 28px; /* Reverted from 1.75rem to 28px */
   font-weight: bold;
   cursor: pointer;
   transition: color 0.3s ease;
@@ -366,12 +363,12 @@ body {
 
 #popup-text h2 {
   text-align: left; /* Ensure headings are left-aligned */
-  margin-bottom: 15px;
+  margin-bottom: 15px; /* Reverted from 1rem to 15px */
 }
 
 #popup-text p {
   text-align: left; /* Left-align paragraphs */
-  margin-bottom: 20px;
+  margin-bottom: 20px; /* Reverted from 1.25rem to 20px */
   line-height: 1.5;
 }
 
@@ -381,16 +378,16 @@ body {
 }
 
 #popup-text form label {
-  margin-bottom: 5px;
+  margin-bottom: 5px; /* Reverted from 0.3125rem to 5px */
   font-weight: bold;
 }
 
 #popup-text form input[type="url"] {
-  padding: 8px;
-  margin-bottom: 10px;
+  padding: 8px; /* Reverted from 0.5rem to 8px */
+  margin-bottom: 10px; /* Reverted from 0.625rem to 10px */
   border: 1px solid #444;
   border-radius: 5px;
-  font-size: 16px;
+  font-size: 16px; /* Reverted from 1rem to 16px */
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -401,7 +398,7 @@ body {
 
 /* Submit Button Default Styles */
 #submit-link-button {
-  padding: 10px 20px;
+  padding: 10px 20px; /* Reverted from 0.625rem 1.25rem to 10px 20px */
   background-color: #7FFF00; /* Light Green */
   color: #1E1E1E;
   border: none;
@@ -437,13 +434,13 @@ body.light-mode .popup-content #submit-link-button:focus {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 10px 20px;
+  padding: 10px 20px; /* Reverted from 0.625rem 1.25rem to 10px 20px */
   background-color: #707070; /* Base background color */
   color: #FFFFFF;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 16px; /* Reverted from 1rem to 16px */
   font-weight: bold;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -481,27 +478,27 @@ body.light-mode .popup-button:focus {
 }
 
 .locked-button i {
-  font-size: 18px;
+  font-size: 18px; /* Reverted from 1.125rem to 18px */
   transition: none;
 }
 
 /* Settings Table Styles */
 .settings-table {
-  width: fit-content;
+  width: 100%; /* Changed to 100% for better responsiveness */
   max-width: 600px; /* Optional: Set a maximum width */
-  margin: 20px auto; /* Centers the table with vertical spacing */
+  margin: 20px auto; /* Reverted from 1.25rem to 20px */
   border-collapse: collapse;
   text-align: left; /* Aligns text within table cells to the left */
 }
 
 .settings-table td {
-  padding: 10px;
+  padding: 10px; /* Reverted from 0.625rem to 10px */
   text-align: left; /* Ensure cell content is left-aligned */
 }
 
 /* Optional: Adjust table headers if any */
 .settings-table th {
-  padding: 10px;
+  padding: 10px; /* Reverted from 0.625rem to 10px */
   text-align: left; /* Left-align headers */
 }
 
@@ -644,34 +641,46 @@ body.light-mode .popup-button:focus {
 .error-message {
     background-color: #f8d7da; /* Light red background */
     color: #721c24; /* Dark red text */
-    padding: 15px;
+    padding: 15px; /* Reverted from 0.9375rem to 15px */
     border: 1px solid #f5c6cb;
     border-radius: 5px;
-    margin-top: 10px;
+    margin-top: 10px; /* Reverted from 0.625rem to 10px */
     display: flex;
     align-items: center;
 }
 
 .error-message i {
-    margin-right: 10px;
+    margin-right: 10px; /* Reverted from 0.625rem to 10px */
     color: #721c24;
+}
+
+body.light-mode .error-message {
+    background-color: #f5c6cb; /* Light red background in light mode */
+    color: #721c24;
+    border: 1px solid #f5c6cb;
 }
 
 /* Processing Message Styles */
 .processing-message {
     background-color: #fff3cd; /* Light yellow background */
     color: #856404; /* Dark yellow text */
-    padding: 15px;
+    padding: 15px; /* Reverted from 0.9375rem to 15px */
     border: 1px solid #ffeeba;
     border-radius: 5px;
-    margin-top: 10px;
+    margin-top: 10px; /* Reverted from 0.625rem to 10px */
     display: flex;
     align-items: center;
 }
 
 .processing-message i {
-    margin-right: 10px;
+    margin-right: 10px; /* Reverted from 0.625rem to 10px */
     color: #856404;
+}
+
+body.light-mode .processing-message {
+    background-color: #ffeeba; /* Light yellow background in light mode */
+    color: #856404;
+    border: 1px solid #ffeeba;
 }
 
 /* Light Mode Styles for Messages */
@@ -685,104 +694,6 @@ body.light-mode .processing-message {
     background-color: #ffeeba; /* Light yellow background in light mode */
     color: #856404;
     border: 1px solid #ffeeba;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .sidebar {
-    width: 200px;
-    padding: 15px;
-  }
-
-  .logo h1 {
-    font-size: 20px;
-  }
-
-  /* Removed theme-toggle-button styles as it's now inside popup */
-
-  .profile img {
-    width: 60px;
-    height: 60px;
-  }
-
-  .popup-content {
-    width: 80%;
-    margin: 20% auto;
-    padding: 15px;
-  }
-
-  .input-section input {
-    font-size: 14px;
-    padding: 8px;
-  }
-
-  .input-section button {
-    padding: 8px 16px;
-    font-size: 14px;
-  }
-
-  .upload-button {
-    padding: 8px 16px;
-    font-size: 14px;
-  }
-
-  .link-button {
-    padding: 8px 16px;
-    font-size: 14px;
-  }
-
-  /* Adjust settings-table for smaller screens */
-  .settings-table td {
-    padding: 5px;
-  }
-}
-
-@media (max-width: 480px) {
-  .sidebar {
-    width: 100%;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .menu ul {
-    display: flex;
-    gap: 10px;
-  }
-
-  /* Removed theme-toggle-button styles as it's now inside popup */
-
-  .profile-card {
-    display: none; /* Hide profile card on small screens */
-  }
-
-  .popup-content {
-    width: 90%;
-    margin: 30% auto;
-    padding: 10px;
-  }
-
-  .upload-button {
-    padding: 6px 12px;
-    font-size: 12px;
-  }
-
-  .link-button {
-    padding: 6px 12px;
-    font-size: 12px;
-  }
-
-  /* Adjust settings-table for very small screens */
-  .settings-table td {
-    padding: 5px;
-  }
-}
-
-/* Additional Styles for Informative Paragraph in Settings Popup */
-.popup-content p {
-  text-align: left; /* Changed from center to left */
-  margin-bottom: 20px;
-  line-height: 1.5;
 }
 
 /* New Styles for Links in Pop-ups */
@@ -810,7 +721,7 @@ body.light-mode .popup-content a:focus {
 
 /* Scrollbar Styling for Results Area (Optional) */
 .results-area::-webkit-scrollbar {
-  width: 8px;
+  width: 8px; /* Reverted from 0.5rem to 8px */
 }
 
 .results-area::-webkit-scrollbar-track {
@@ -819,5 +730,1109 @@ body.light-mode .popup-content a:focus {
 
 .results-area::-webkit-scrollbar-thumb {
   background-color: #7FFF00;
-  border-radius: 4px;
+  border-radius: 4px; /* Reverted from 0.25rem to 4px */
+}
+
+/* Responsive Design */
+
+/* Tablets and Small Desktops */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 220px;
+    padding: 18px;
+  }
+
+  .logo h1 {
+    font-size: 22px; /* Slightly smaller font from 24px to 22px */
+  }
+
+  .profile img {
+    width: 56px; /* 3.5rem to 56px */
+    height: 56px; /* 3.5rem to 56px */
+  }
+
+  .popup-content {
+    width: 70%;
+    margin: 10% auto;
+    padding: 24px; /* 1.5rem to 24px */
+  }
+
+  .input-section input {
+    flex: 2 1 300px; /* Ensure input remains wider on smaller screens */
+    font-size: 15px; /* Slightly smaller font from 16px to 15px */
+    padding: 12px; /* 0.75rem to 12px */
+  }
+
+  .input-section button,
+  .upload-button,
+  .link-button {
+    padding: 7px 14px; /* Further reduced padding */
+    font-size: 15px; /* Slightly smaller font from 16px to 15px */
+    max-width: 140px; /* Adjust max-width */
+  }
+
+  .settings-table td {
+    padding: 5px; /* Reverted from 0.3125rem to 5px */
+  }
+}
+
+/* Tablets */
+@media (max-width: 900px) {
+  .sidebar {
+    width: 200px;
+    padding: 16px;
+  }
+
+  .logo h1 {
+    font-size: 20px; /* Reverted from 1.3rem to 20px */
+  }
+
+  .profile img {
+    width: 52px; /* 3.25rem to 52px */
+    height: 52px; /* 3.25rem to 52px */
+  }
+
+  .popup-content {
+    width: 75%;
+    margin: 12% auto;
+    padding: 24px; /* 1.5rem to 24px */
+  }
+
+  .input-section input {
+    flex: 2 1 250px; /* Ensure input remains wider */
+    font-size: 14px; /* Reverted from 0.9rem to 14px */
+    padding: 11px; /* 0.7rem to 11px */
+  }
+
+  .input-section button,
+  .upload-button,
+  .link-button {
+    padding: 6px 12px; /* Further reduced padding */
+    font-size: 14px; /* Reverted from 0.9rem to 14px */
+    max-width: 130px; /* Adjust max-width */
+  }
+
+  .settings-table td {
+    padding: 5px; /* Reverted from 0.3125rem to 5px */
+  }
+}
+
+/* Tablets and Below */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 180px;
+    padding: 14px;
+  }
+
+  .logo h1 {
+    font-size: 18px; /* Reverted from 1.2rem to 18px */
+  }
+
+  .profile img {
+    width: 48px; /* 3rem to 48px */
+    height: 48px; /* 3rem to 48px */
+  }
+
+  .popup-content {
+    width: 80%;
+    margin: 15% auto;
+    padding: 20px; /* 1.25rem to 20px */
+  }
+
+  .input-section input {
+    flex: 2 1 200px; /* Ensure input remains wider */
+    font-size: 13px; /* Reverted from 0.85rem to 13px */
+    padding: 10px; /* 0.65rem to 10px */
+  }
+
+  .input-section button,
+  .upload-button,
+  .link-button {
+    padding: 5px 10px; /* Further reduced padding */
+    font-size: 13px; /* Reverted from 0.85rem to 13px */
+    max-width: 120px; /* Adjust max-width */
+  }
+
+  .settings-table td {
+    padding: 5px; /* Reverted from 0.3125rem to 5px */
+  }
+}
+
+/* Mobile Phones */
+@media (max-width: 480px) {
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+  }
+
+  .logo h1 {
+    font-size: 16px; /* Reverted from 1.1rem to 16px */
+    margin-bottom: 0;
+  }
+
+  .menu ul {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .profile-card {
+    display: none; /* Hide profile card on small screens */
+  }
+
+  .popup-content {
+    width: 90%;
+    margin: 20% auto;
+    padding: 16px; /* 1rem to 16px */
+    overflow-y: auto;
+    max-height: 80vh;
+  }
+
+  .input-section {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 5px; /* Reduced gap for small screens */
+  }
+
+  .input-section input {
+    flex: 2 1 180px; /* Ensure input remains wider */
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .input-section button,
+  .upload-button,
+  .link-button {
+    width: 100%;
+    margin: 5px 0;
+    padding: 8px; /* Uniform padding */
+    font-size: 12px; /* Reverted from 0.8rem to 12px */
+    max-width: none; /* Remove max-width to allow full width */
+  }
+
+  /* Adjust settings-table for very small screens */
+  .settings-table td {
+    padding: 5px; /* Reverted from 0.3125rem to 5px */
+  }
+}
+
+/* Additional Styles for Informative Paragraph in Settings Popup */
+.popup-content p {
+  text-align: left; /* Changed from center to left */
+  margin-bottom: 20px; /* Reverted from 1.25rem to 20px */
+  line-height: 1.5;
+}
+
+/* Responsive Images */
+.profile img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Ensure Buttons and Inputs Wrap Gracefully */
+.input-section button,
+.upload-button,
+.link-button {
+  flex: 1 1 auto;
+}
+
+/* Ensure Popup Content Doesn't Overflow */
+@media (max-width: 480px) {
+  .popup-content {
+    overflow-y: auto;
+    max-height: 80vh;
+  }
+}
+
+/* Light Mode Styles */
+body.light-mode {
+  background-color: #F3F3F3; /* Slightly darker than white */
+  color: #333333;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.light-mode .sidebar {
+  background-color: #E0E0E0;
+}
+
+body.light-mode .logo h1 {
+  color: #006400; /* Darker green */
+}
+
+body.light-mode .menu ul li a {
+  color: #333333; /* Inherit color from light mode */
+}
+
+body.light-mode .menu ul li a:hover,
+body.light-mode .menu ul li a:focus {
+  color: #006400; /* Darker green on hover */
+}
+
+body.light-mode .profile-card {
+  background-color: #D0D0D0;
+}
+
+body.light-mode .results-area {
+  background-color: #E0E0E0;
+  color: #333333;
+}
+
+body.light-mode .results-area h3 {
+  color: #006400;
+}
+
+body.light-mode .results-area hr {
+  background: #006400;
+}
+
+body.light-mode .result-output {
+  background-color: #F3F3F3;
+  color: #333333;
+  border: 1px solid #444;
+}
+
+body.light-mode .result-output:focus {
+  background-color: #CCCCCC;
+  color: #333333;
+}
+
+body.light-mode .input-section {
+  background-color: #E0E0E0;
+}
+
+body.light-mode .input-section input {
+  background-color: #F3F3F3;
+  color: #333333;
+}
+
+body.light-mode .input-section input:focus {
+  background-color: #CCCCCC;
+}
+
+body.light-mode .input-section button {
+  background-color: #006400; /* Darker green */
+  color: #FFFFFF;
+}
+
+body.light-mode .input-section button:hover,
+body.light-mode .input-section button:focus {
+  background-color: #004d00;
+  color: #FFFFFF; /* Ensure text color remains white on hover/focus */
+}
+
+body.light-mode .upload-button {
+  background-color: #006400; /* Darker green */
+  color: #FFFFFF;
+}
+
+body.light-mode .upload-button:hover,
+body.light-mode .upload-button:focus {
+  background-color: #004d00;
+  color: #FFFFFF;
+}
+
+body.light-mode .link-button {
+  background-color: #006400; /* Darker green */
+  color: #FFFFFF;
+}
+
+body.light-mode .link-button:hover,
+body.light-mode .link-button:focus {
+  background-color: #004d00;
+  color: #FFFFFF;
+}
+
+body.light-mode .popup-content {
+  background-color: #E0E0E0;
+  color: #333333;
+}
+
+body.light-mode .popup-content #submit-link-button {
+  background-color: #006400; /* Dark Green */
+  color: #FFFFFF;
+}
+
+body.light-mode .popup-content #submit-link-button:hover,
+body.light-mode .popup-content #submit-link-button:focus {
+  background-color: #004d00; /* Darker Green on Hover */
+  color: #FFFFFF;
+  outline: none;
+}
+
+body.light-mode .close {
+  color: #555555;
+}
+
+body.light-mode .close:hover,
+body.light-mode .close:focus {
+  color: #333333;
+}
+
+body.light-mode .popup-button {
+  background-color: #006400; /* Dark Green in Light Mode */
+  color: #FFFFFF;
+}
+
+body.light-mode .popup-button:hover,
+body.light-mode .popup-button:focus {
+  background-color: #004d00; /* Darker Green on Hover in Light Mode */
+  color: #FFFFFF;
+}
+
+/* Error Message Styles */
+.error-message {
+    background-color: #f8d7da; /* Light red background */
+    color: #721c24; /* Dark red text */
+    padding: 15px; /* Reverted from 0.9375rem to 15px */
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+    margin-top: 10px; /* Reverted from 0.625rem to 10px */
+    display: flex;
+    align-items: center;
+}
+
+.error-message i {
+    margin-right: 10px; /* Reverted from 0.625rem to 10px */
+    color: #721c24;
+}
+
+body.light-mode .error-message {
+    background-color: #f5c6cb; /* Light red background in light mode */
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Processing Message Styles */
+.processing-message {
+    background-color: #fff3cd; /* Light yellow background */
+    color: #856404; /* Dark yellow text */
+    padding: 15px; /* Reverted from 0.9375rem to 15px */
+    border: 1px solid #ffeeba;
+    border-radius: 5px;
+    margin-top: 10px; /* Reverted from 0.625rem to 10px */
+    display: flex;
+    align-items: center;
+}
+
+.processing-message i {
+    margin-right: 10px; /* Reverted from 0.625rem to 10px */
+    color: #856404;
+}
+
+body.light-mode .processing-message {
+    background-color: #ffeeba; /* Light yellow background in light mode */
+    color: #856404;
+    border: 1px solid #ffeeba;
+}
+
+/* Light Mode Styles for Messages */
+body.light-mode .error-message {
+    background-color: #f5c6cb; /* Light red background in light mode */
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+body.light-mode .processing-message {
+    background-color: #ffeeba; /* Light yellow background in light mode */
+    color: #856404;
+    border: 1px solid #ffeeba;
+}
+
+/* New Styles for Links in Pop-ups */
+.popup-content a {
+  color: #7FFF00; /* Light Green in Dark Mode */
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.popup-content a:hover,
+.popup-content a:focus {
+  color: #9AFF9A; /* Slightly lighter green on hover */
+  outline: none;
+}
+
+body.light-mode .popup-content a {
+  color: #006400; /* Dark Green in Light Mode */
+}
+
+body.light-mode .popup-content a:hover,
+body.light-mode .popup-content a:focus {
+  color: #004d00; /* Darker Green on hover in Light Mode */
+  outline: none;
+}
+
+/* Scrollbar Styling for Results Area (Optional) */
+.results-area::-webkit-scrollbar {
+  width: 8px; /* Reverted from 0.5rem to 8px */
+}
+
+.results-area::-webkit-scrollbar-track {
+  background: #1E1E1E;
+}
+
+.results-area::-webkit-scrollbar-thumb {
+  background-color: #7FFF00;
+  border-radius: 4px; /* Reverted from 0.25rem to 4px */
+}
+
+/* Responsive Design */
+
+/* Tablets and Small Desktops */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 220px;
+    padding: 18px;
+  }
+
+  .logo h1 {
+    font-size: 22px; /* Slightly smaller font from 24px to 22px */
+  }
+
+  .profile img {
+    width: 56px; /* 3.5rem to 56px */
+    height: 56px; /* 3.5rem to 56px */
+  }
+
+  .popup-content {
+    width: 70%;
+    margin: 10% auto;
+    padding: 24px; /* 1.5rem to 24px */
+  }
+
+  .input-section input {
+    flex: 2 1 300px; /* Ensure input remains wider */
+    font-size: 15px; /* Slightly smaller font from 16px to 15px */
+    padding: 12px; /* 0.75rem to 12px */
+  }
+
+  .input-section button,
+  .upload-button,
+  .link-button {
+    padding: 7px 14px; /* Further reduced padding */
+    font-size: 15px; /* Slightly smaller font from 16px to 15px */
+    max-width: 140px; /* Adjust max-width */
+  }
+
+  .settings-table td {
+    padding: 5px; /* Reverted from 0.3125rem to 5px */
+  }
+}
+
+/* Tablets */
+@media (max-width: 900px) {
+  .sidebar {
+    width: 200px;
+    padding: 16px;
+  }
+
+  .logo h1 {
+    font-size: 20px; /* Reverted from 1.3rem to 20px */
+  }
+
+  .profile img {
+    width: 52px; /* 3.25rem to 52px */
+    height: 52px; /* 3.25rem to 52px */
+  }
+
+  .popup-content {
+    width: 75%;
+    margin: 12% auto;
+    padding: 24px; /* 1.5rem to 24px */
+  }
+
+  .input-section input {
+    flex: 2 1 250px; /* Ensure input remains wider */
+    font-size: 14px; /* Reverted from 0.9rem to 14px */
+    padding: 11px; /* 0.7rem to 11px */
+  }
+
+  .input-section button,
+  .upload-button,
+  .link-button {
+    padding: 6px 12px; /* Further reduced padding */
+    font-size: 14px; /* Reverted from 0.9rem to 14px */
+    max-width: 130px; /* Adjust max-width */
+  }
+
+  .settings-table td {
+    padding: 5px; /* Reverted from 0.3125rem to 5px */
+  }
+}
+
+/* Tablets and Below */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 180px;
+    padding: 14px;
+  }
+
+  .logo h1 {
+    font-size: 18px; /* Reverted from 1.2rem to 18px */
+  }
+
+  .profile img {
+    width: 48px; /* 3rem to 48px */
+    height: 48px; /* 3rem to 48px */
+  }
+
+  .popup-content {
+    width: 80%;
+    margin: 15% auto;
+    padding: 20px; /* 1.25rem to 20px */
+  }
+
+  .input-section input {
+    flex: 2 1 200px; /* Ensure input remains wider */
+    font-size: 13px; /* Reverted from 0.85rem to 13px */
+    padding: 10px; /* 0.65rem to 10px */
+  }
+
+  .input-section button,
+  .upload-button,
+  .link-button {
+    padding: 5px 10px; /* Further reduced padding */
+    font-size: 13px; /* Reverted from 0.85rem to 13px */
+    max-width: 120px; /* Adjust max-width */
+  }
+
+  .settings-table td {
+    padding: 5px; /* Reverted from 0.3125rem to 5px */
+  }
+}
+
+/* Mobile Phones */
+@media (max-width: 480px) {
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+  }
+
+  .logo h1 {
+    font-size: 16px; /* Reverted from 1.1rem to 16px */
+    margin-bottom: 0;
+  }
+
+  .menu ul {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .profile-card {
+    display: none; /* Hide profile card on small screens */
+  }
+
+  .popup-content {
+    width: 90%;
+    margin: 20% auto;
+    padding: 16px; /* 1rem to 16px */
+    overflow-y: auto;
+    max-height: 80vh;
+  }
+
+  .input-section {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 5px; /* Reduced gap for small screens */
+  }
+
+  .input-section input {
+    flex: 2 1 180px; /* Ensure input remains wider */
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .input-section button,
+  .upload-button,
+  .link-button {
+    width: 100%;
+    margin: 5px 0;
+    padding: 8px; /* Uniform padding */
+    font-size: 12px; /* Reverted from 0.8rem to 12px */
+    max-width: none; /* Remove max-width to allow full width */
+  }
+
+  /* Adjust settings-table for very small screens */
+  .settings-table td {
+    padding: 5px; /* Reverted from 0.3125rem to 5px */
+  }
+}
+
+/* Additional Styles for Informative Paragraph in Settings Popup */
+.popup-content p {
+  text-align: left; /* Changed from center to left */
+  margin-bottom: 20px; /* Reverted from 1.25rem to 20px */
+  line-height: 1.5;
+}
+
+/* Responsive Images */
+.profile img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Ensure Buttons and Inputs Wrap Gracefully */
+.input-section button,
+.upload-button,
+.link-button {
+  flex: 1 1 auto;
+}
+
+/* Ensure Popup Content Doesn't Overflow */
+@media (max-width: 480px) {
+  .popup-content {
+    overflow-y: auto;
+    max-height: 80vh;
+  }
+}
+
+/* Light Mode Styles */
+body.light-mode {
+  background-color: #F3F3F3; /* Slightly darker than white */
+  color: #333333;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.light-mode .sidebar {
+  background-color: #E0E0E0;
+}
+
+body.light-mode .logo h1 {
+  color: #006400; /* Darker green */
+}
+
+body.light-mode .menu ul li a {
+  color: #333333; /* Inherit color from light mode */
+}
+
+body.light-mode .menu ul li a:hover,
+body.light-mode .menu ul li a:focus {
+  color: #006400; /* Darker green on hover */
+}
+
+body.light-mode .profile-card {
+  background-color: #D0D0D0;
+}
+
+body.light-mode .results-area {
+  background-color: #E0E0E0;
+  color: #333333;
+}
+
+body.light-mode .results-area h3 {
+  color: #006400;
+}
+
+body.light-mode .results-area hr {
+  background: #006400;
+}
+
+body.light-mode .result-output {
+  background-color: #F3F3F3;
+  color: #333333;
+  border: 1px solid #444;
+}
+
+body.light-mode .result-output:focus {
+  background-color: #CCCCCC;
+  color: #333333;
+}
+
+body.light-mode .input-section {
+  background-color: #E0E0E0;
+}
+
+body.light-mode .input-section input {
+  background-color: #F3F3F3;
+  color: #333333;
+}
+
+body.light-mode .input-section input:focus {
+  background-color: #CCCCCC;
+}
+
+body.light-mode .input-section button {
+  background-color: #006400; /* Darker green */
+  color: #FFFFFF;
+}
+
+body.light-mode .input-section button:hover,
+body.light-mode .input-section button:focus {
+  background-color: #004d00;
+  color: #FFFFFF; /* Ensure text color remains white on hover/focus */
+}
+
+body.light-mode .upload-button {
+  background-color: #006400; /* Darker green */
+  color: #FFFFFF;
+}
+
+body.light-mode .upload-button:hover,
+body.light-mode .upload-button:focus {
+  background-color: #004d00;
+  color: #FFFFFF;
+}
+
+body.light-mode .link-button {
+  background-color: #006400; /* Darker green */
+  color: #FFFFFF;
+}
+
+body.light-mode .link-button:hover,
+body.light-mode .link-button:focus {
+  background-color: #004d00;
+  color: #FFFFFF;
+}
+
+body.light-mode .popup-content {
+  background-color: #E0E0E0;
+  color: #333333;
+}
+
+body.light-mode .popup-content #submit-link-button {
+  background-color: #006400; /* Dark Green */
+  color: #FFFFFF;
+}
+
+body.light-mode .popup-content #submit-link-button:hover,
+body.light-mode .popup-content #submit-link-button:focus {
+  background-color: #004d00; /* Darker Green on Hover */
+  color: #FFFFFF;
+  outline: none;
+}
+
+body.light-mode .close {
+  color: #555555;
+}
+
+body.light-mode .close:hover,
+body.light-mode .close:focus {
+  color: #333333;
+}
+
+body.light-mode .popup-button {
+  background-color: #006400; /* Dark Green in Light Mode */
+  color: #FFFFFF;
+}
+
+body.light-mode .popup-button:hover,
+body.light-mode .popup-button:focus {
+  background-color: #004d00; /* Darker Green on Hover in Light Mode */
+  color: #FFFFFF;
+}
+
+/* Error Message Styles */
+.error-message {
+    background-color: #f8d7da; /* Light red background */
+    color: #721c24; /* Dark red text */
+    padding: 15px; /* Reverted from 0.9375rem to 15px */
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+    margin-top: 10px; /* Reverted from 0.625rem to 10px */
+    display: flex;
+    align-items: center;
+}
+
+.error-message i {
+    margin-right: 10px; /* Reverted from 0.625rem to 10px */
+    color: #721c24;
+}
+
+body.light-mode .error-message {
+    background-color: #f5c6cb; /* Light red background in light mode */
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Processing Message Styles */
+.processing-message {
+    background-color: #fff3cd; /* Light yellow background */
+    color: #856404; /* Dark yellow text */
+    padding: 15px; /* Reverted from 0.9375rem to 15px */
+    border: 1px solid #ffeeba;
+    border-radius: 5px;
+    margin-top: 10px; /* Reverted from 0.625rem to 10px */
+    display: flex;
+    align-items: center;
+}
+
+.processing-message i {
+    margin-right: 10px; /* Reverted from 0.625rem to 10px */
+    color: #856404;
+}
+
+body.light-mode .processing-message {
+    background-color: #ffeeba; /* Light yellow background in light mode */
+    color: #856404;
+    border: 1px solid #ffeeba;
+}
+
+/* Light Mode Styles for Messages */
+body.light-mode .error-message {
+    background-color: #f5c6cb; /* Light red background in light mode */
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+body.light-mode .processing-message {
+    background-color: #ffeeba; /* Light yellow background in light mode */
+    color: #856404;
+    border: 1px solid #ffeeba;
+}
+
+/* New Styles for Links in Pop-ups */
+.popup-content a {
+  color: #7FFF00; /* Light Green in Dark Mode */
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.popup-content a:hover,
+.popup-content a:focus {
+  color: #9AFF9A; /* Slightly lighter green on hover */
+  outline: none;
+}
+
+body.light-mode .popup-content a {
+  color: #006400; /* Dark Green in Light Mode */
+}
+
+body.light-mode .popup-content a:hover,
+body.light-mode .popup-content a:focus {
+  color: #004d00; /* Darker Green on hover in Light Mode */
+  outline: none;
+}
+
+/* Scrollbar Styling for Results Area (Optional) */
+.results-area::-webkit-scrollbar {
+  width: 8px; /* Reverted from 0.5rem to 8px */
+}
+
+.results-area::-webkit-scrollbar-track {
+  background: #1E1E1E;
+}
+
+.results-area::-webkit-scrollbar-thumb {
+  background-color: #7FFF00;
+  border-radius: 4px; /* Reverted from 0.25rem to 4px */
+}
+
+/* Responsive Design */
+
+/* Tablets and Small Desktops */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 220px;
+    padding: 18px;
+  }
+
+  .logo h1 {
+    font-size: 22px; /* Slightly smaller font from 24px to 22px */
+  }
+
+  .profile img {
+    width: 56px; /* 3.5rem to 56px */
+    height: 56px; /* 3.5rem to 56px */
+  }
+
+  .popup-content {
+    width: 70%;
+    margin: 10% auto;
+    padding: 24px; /* 1.5rem to 24px */
+  }
+
+  .input-section input {
+    flex: 2 1 300px; /* Ensure input remains wider */
+    font-size: 15px; /* Slightly smaller font from 16px to 15px */
+    padding: 12px; /* 0.75rem to 12px */
+  }
+
+  .input-section button,
+  .upload-button,
+  .link-button {
+    padding: 7px 14px; /* Further reduced padding */
+    font-size: 15px; /* Slightly smaller font from 16px to 15px */
+    max-width: 140px; /* Adjust max-width */
+  }
+
+  .settings-table td {
+    padding: 5px; /* Reverted from 0.3125rem to 5px */
+  }
+}
+
+/* Tablets */
+@media (max-width: 900px) {
+  .sidebar {
+    width: 200px;
+    padding: 16px;
+  }
+
+  .logo h1 {
+    font-size: 20px; /* Reverted from 1.3rem to 20px */
+  }
+
+  .profile img {
+    width: 52px; /* 3.25rem to 52px */
+    height: 52px; /* 3.25rem to 52px */
+  }
+
+  .popup-content {
+    width: 75%;
+    margin: 12% auto;
+    padding: 24px; /* 1.5rem to 24px */
+  }
+
+  .input-section input {
+    flex: 2 1 250px; /* Ensure input remains wider */
+    font-size: 14px; /* Reverted from 0.9rem to 14px */
+    padding: 11px; /* 0.7rem to 11px */
+  }
+
+  .input-section button,
+  .upload-button,
+  .link-button {
+    padding: 6px 12px; /* Further reduced padding */
+    font-size: 14px; /* Reverted from 0.9rem to 14px */
+    max-width: 130px; /* Adjust max-width */
+  }
+
+  .settings-table td {
+    padding: 5px; /* Reverted from 0.3125rem to 5px */
+  }
+}
+
+/* Tablets and Below */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 180px;
+    padding: 14px;
+  }
+
+  .logo h1 {
+    font-size: 18px; /* Reverted from 1.2rem to 18px */
+  }
+
+  .profile img {
+    width: 48px; /* 3rem to 48px */
+    height: 48px; /* 3rem to 48px */
+  }
+
+  .popup-content {
+    width: 80%;
+    margin: 15% auto;
+    padding: 20px; /* 1.25rem to 20px */
+  }
+
+  .input-section input {
+    flex: 2 1 200px; /* Ensure input remains wider */
+    font-size: 13px; /* Reverted from 0.85rem to 13px */
+    padding: 10px; /* 0.65rem to 10px */
+  }
+
+  .input-section button,
+  .upload-button,
+  .link-button {
+    padding: 5px 10px; /* Further reduced padding */
+    font-size: 13px; /* Reverted from 0.85rem to 13px */
+    max-width: 120px; /* Adjust max-width */
+  }
+
+  .settings-table td {
+    padding: 5px; /* Reverted from 0.3125rem to 5px */
+  }
+}
+
+/* Mobile Phones */
+@media (max-width: 480px) {
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+  }
+
+  .logo h1 {
+    font-size: 16px; /* Reverted from 1.1rem to 16px */
+    margin-bottom: 0;
+  }
+
+  .menu ul {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .profile-card {
+    display: none; /* Hide profile card on small screens */
+  }
+
+  .popup-content {
+    width: 90%;
+    margin: 20% auto;
+    padding: 16px; /* 1rem to 16px */
+    overflow-y: auto;
+    max-height: 80vh;
+  }
+
+  .input-section {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 5px; /* Reduced gap for small screens */
+  }
+
+  .input-section input {
+    flex: 2 1 180px; /* Ensure input remains wider */
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .input-section button,
+  .upload-button,
+  .link-button {
+    width: 100%;
+    margin: 5px 0;
+    padding: 8px; /* Uniform padding */
+    font-size: 12px; /* Reverted from 0.8rem to 12px */
+    max-width: none; /* Remove max-width to allow full width */
+  }
+
+  /* Adjust settings-table for very small screens */
+  .settings-table td {
+    padding: 5px; /* Reverted from 0.3125rem to 5px */
+  }
+}
+
+/* Additional Styles for Informative Paragraph in Settings Popup */
+.popup-content p {
+  text-align: left; /* Changed from center to left */
+  margin-bottom: 20px; /* Reverted from 1.25rem to 20px */
+  line-height: 1.5;
+}
+
+/* Responsive Images */
+.profile img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Ensure Buttons and Inputs Wrap Gracefully */
+.input-section button,
+.upload-button,
+.link-button {
+  flex: 1 1 auto;
+}
+
+/* Ensure Popup Content Doesn't Overflow */
+@media (max-width: 480px) {
+  .popup-content {
+    overflow-y: auto;
+    max-height: 80vh;
+  }
 }
