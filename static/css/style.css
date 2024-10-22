@@ -1,3 +1,5 @@
+/* static/css/style.css */
+
 /* Reset and Basic Styles */
 * {
   margin: 0;
@@ -5,11 +7,17 @@
   box-sizing: border-box;
 }
 
+html, body {
+  height: 100%;
+}
+
+/* Dark Mode Styles */
 body {
   font-family: 'Arial', sans-serif;
   background-color: #1E1E1E;
   color: #FFFFFF;
   display: flex;
+  flex-direction: column;
   min-height: 100vh;
   opacity: 0; /* For page load animation */
   animation: fadeIn 1s forwards;
@@ -23,7 +31,9 @@ body {
 
 .container {
   display: flex;
+  flex-direction: row;
   width: 100%;
+  height: 100%; /* Added to fill available vertical space */
 }
 
 /* Sidebar Styles */
@@ -115,26 +125,28 @@ body {
 
 /* Main Content Styles */
 .content {
-  flex: 1;
-  padding: 20px;
+  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  padding: 20px;
+  min-height: 0; /* Allows children to shrink properly */
 }
 
 /* Result Area Styles */
 .results-area {
-  margin-top: 0; /* Removed top margin to align with container */
+  flex: 1 1 auto; /* Allows it to expand and fill available space */
+  overflow-y: auto;
+  /* Other existing styles */
+  margin-top: 0;
   padding: 15px;
   background-color: #2C2C2C;
   border-radius: 10px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
   transition: background-color 0.3s ease, color 0.3s ease;
-  flex-grow: 1; /* Allows the result area to expand and fill available space */
   display: flex;
   flex-direction: column;
-  opacity: 0; /* Initial opacity for animation */
-  transform: translateY(20px); /* Initial position for animation */
+  opacity: 0;
+  transform: translateY(20px);
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
@@ -151,8 +163,12 @@ body {
 }
 
 .result-output {
-  width: 100%;
-  height: 100%;
+  /* Remove fixed height to prevent expansion */
+  height: auto;
+
+  /* Ensure it takes available space within .results-area */
+  flex: 1;
+
   padding: 10px;
   border: 1px solid #444;
   border-radius: 5px;
@@ -161,6 +177,9 @@ body {
   color: #FFFFFF;
   font-size: 16px;
   transition: background-color 0.3s ease, color 0.3s ease;
+
+  /* Add overflow to handle excessive content */
+  overflow-y: auto;
 }
 
 .result-output:focus {
@@ -168,8 +187,10 @@ body {
   outline: none;
 }
 
-/* Input Section at the Bottom */
+/* Input Section Styles */
 .input-section {
+  flex-shrink: 0; /* Prevents it from shrinking */
+  /* Existing styles */
   display: flex;
   align-items: center;
   background-color: #2C2C2C;
@@ -179,7 +200,6 @@ body {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
   transition: background-color 0.3s ease;
 }
-
 .input-section input {
   flex: 1;
   padding: 10px;
@@ -411,6 +431,80 @@ body.light-mode .popup-content #submit-link-button:focus {
   outline: none;
 }
 
+/* Popup Buttons Styles */
+.popup-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background-color: #707070; /* Base background color */
+  color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.popup-button:hover,
+.popup-button:focus {
+  background-color: #4CD964; /* Hover color */
+  outline: none;
+}
+
+body.light-mode .popup-button {
+  background-color: #006400; /* Dark Green in Light Mode */
+  color: #FFFFFF;
+}
+
+body.light-mode .popup-button:hover,
+body.light-mode .popup-button:focus {
+  background-color: #004d00; /* Darker Green on Hover in Light Mode */
+  color: #FFFFFF;
+}
+
+/* Locked Buttons Styles */
+.locked-button {
+  background-color: #A9A9A9; /* Gray for locked appearance */
+  cursor: not-allowed; /* Indicate disabled */
+  opacity: 0.6; /* Slight transparency to indicate disabled state */
+}
+
+.locked-button:hover,
+.locked-button:focus {
+  background-color: #A9A9A9; /* No change on hover */
+  color: #FFFFFF;
+  outline: none;
+  /* Prevent rotation on hover */
+}
+
+.locked-button i {
+  font-size: 18px;
+  transition: none;
+}
+
+/* Settings Table Styles */
+.settings-table {
+  width: fit-content;
+  max-width: 600px; /* Optional: Set a maximum width */
+  margin: 20px auto; /* Centers the table with vertical spacing */
+  border-collapse: collapse;
+  text-align: left; /* Aligns text within table cells to the left */
+}
+
+.settings-table td {
+  padding: 10px;
+  text-align: left; /* Ensure cell content is left-aligned */
+}
+
+/* Optional: Adjust table headers if any */
+.settings-table th {
+  padding: 10px;
+  text-align: left; /* Left-align headers */
+}
+
 /* Light Mode Styles */
 body.light-mode {
   background-color: #F3F3F3; /* Slightly darker than white */
@@ -535,29 +629,6 @@ body.light-mode .close:focus {
   color: #333333;
 }
 
-/* Popup Buttons Styles */
-.popup-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 10px 20px;
-  background-color: #707070; /* Base background color */
-  color: #FFFFFF;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.popup-button:hover,
-.popup-button:focus {
-  background-color: #4CD964; /* Hover color */
-  outline: none;
-}
-
 body.light-mode .popup-button {
   background-color: #006400; /* Dark Green in Light Mode */
   color: #FFFFFF;
@@ -569,44 +640,51 @@ body.light-mode .popup-button:focus {
   color: #FFFFFF;
 }
 
-/* Locked Buttons Styles */
-.locked-button {
-  background-color: #A9A9A9; /* Gray for locked appearance */
-  cursor: not-allowed; /* Indicate disabled */
-  opacity: 0.6; /* Slight transparency to indicate disabled state */
+/* Error Message Styles */
+.error-message {
+    background-color: #f8d7da; /* Light red background */
+    color: #721c24; /* Dark red text */
+    padding: 15px;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
 }
 
-.locked-button:hover,
-.locked-button:focus {
-  background-color: #A9A9A9; /* No change on hover */
-  color: #FFFFFF;
-  outline: none;
-  /* Prevent rotation on hover */
+.error-message i {
+    margin-right: 10px;
+    color: #721c24;
 }
 
-.locked-button i {
-  font-size: 18px;
-  transition: none;
+/* Processing Message Styles */
+.processing-message {
+    background-color: #fff3cd; /* Light yellow background */
+    color: #856404; /* Dark yellow text */
+    padding: 15px;
+    border: 1px solid #ffeeba;
+    border-radius: 5px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
 }
 
-/* Settings Table Styles */
-.settings-table {
-  width: fit-content;
-  max-width: 600px; /* Optional: Set a maximum width */
-  margin: 20px auto; /* Centers the table with vertical spacing */
-  border-collapse: collapse;
-  text-align: left; /* Aligns text within table cells to the left */
+.processing-message i {
+    margin-right: 10px;
+    color: #856404;
 }
 
-.settings-table td {
-  padding: 10px;
-  text-align: left; /* Ensure cell content is left-aligned */
+/* Light Mode Styles for Messages */
+body.light-mode .error-message {
+    background-color: #f5c6cb; /* Light red background in light mode */
+    color: #721c24;
+    border: 1px solid #f5c6cb;
 }
 
-/* Optional: Adjust table headers if any */
-.settings-table th {
-  padding: 10px;
-  text-align: left; /* Left-align headers */
+body.light-mode .processing-message {
+    background-color: #ffeeba; /* Light yellow background in light mode */
+    color: #856404;
+    border: 1px solid #ffeeba;
 }
 
 /* Responsive Design */
@@ -653,17 +731,12 @@ body.light-mode .popup-button:focus {
     font-size: 14px;
   }
 
-  .result-output {
-    height: 120px; /* Adjusted height for smaller screens */
-  }
-
   /* Adjust settings-table for smaller screens */
   .settings-table td {
     padding: 5px;
   }
 }
 
-/* Further Responsive Adjustments for Smaller Screens */
 @media (max-width: 480px) {
   .sidebar {
     width: 100%;
@@ -699,10 +772,6 @@ body.light-mode .popup-button:focus {
     font-size: 12px;
   }
 
-  .result-output {
-    height: 100px; /* Further adjusted height for very small screens */
-  }
-
   /* Adjust settings-table for very small screens */
   .settings-table td {
     padding: 5px;
@@ -711,30 +780,44 @@ body.light-mode .popup-button:focus {
 
 /* Additional Styles for Informative Paragraph in Settings Popup */
 .popup-content p {
-    text-align: left; /* Changed from center to left */
-    margin-bottom: 20px;
-    line-height: 1.5;
+  text-align: left; /* Changed from center to left */
+  margin-bottom: 20px;
+  line-height: 1.5;
 }
 
 /* New Styles for Links in Pop-ups */
 .popup-content a {
-    color: #7FFF00; /* Light Green in Dark Mode */
-    text-decoration: none;
-    transition: color 0.3s ease;
+  color: #7FFF00; /* Light Green in Dark Mode */
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
 .popup-content a:hover,
 .popup-content a:focus {
-    color: #9AFF9A; /* Slightly lighter green on hover */
-    outline: none;
+  color: #9AFF9A; /* Slightly lighter green on hover */
+  outline: none;
 }
 
 body.light-mode .popup-content a {
-    color: #006400; /* Dark Green in Light Mode */
+  color: #006400; /* Dark Green in Light Mode */
 }
 
 body.light-mode .popup-content a:hover,
 body.light-mode .popup-content a:focus {
-    color: #004d00; /* Darker Green on hover in Light Mode */
-    outline: none;
+  color: #004d00; /* Darker Green on hover in Light Mode */
+  outline: none;
+}
+
+/* Scrollbar Styling for Results Area (Optional) */
+.results-area::-webkit-scrollbar {
+  width: 8px;
+}
+
+.results-area::-webkit-scrollbar-track {
+  background: #1E1E1E;
+}
+
+.results-area::-webkit-scrollbar-thumb {
+  background-color: #7FFF00;
+  border-radius: 4px;
 }
