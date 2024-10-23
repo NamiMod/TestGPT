@@ -1,8 +1,7 @@
-<!-- templates/index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- (Head content remains the same) -->
+    <!-- Head content remains the same -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TestGPT</title>
@@ -42,7 +41,6 @@
                     <li><a href="#" class="menu-item" data-popup="help">Help</a></li>
                     <li><a href="#" class="menu-item" data-popup="settings">Settings</a></li>
                     <li><a href="#" class="menu-item" data-popup="about">About Us</a></li>
-                    <!-- Removed Dark Mode Button from Main Sidebar -->
                 </ul>
             </nav>
 
@@ -63,6 +61,7 @@
                 <div id="processing-message" class="processing-message" style="display: none;">
                     <i class="fas fa-spinner fa-spin"></i> Processing...
                 </div>
+                <div id="success-message" class="success-message" style="display: none;"></div>
             </div>
 
             <!-- Input Section -->
@@ -71,7 +70,7 @@
                 <button type="button" id="search-button">Send</button>
                 
                 <!-- Hidden File Input -->
-                <input type="file" id="upload-input" class="file-input" aria-label="Upload File">
+                <input type="file" id="upload-input" class="file-input" aria-label="Upload File" accept=".yaml,.yml,.unity">
                 
                 <!-- Styled Label Acting as Button -->
                 <label for="upload-input" class="upload-button" aria-label="Upload File">
@@ -223,8 +222,6 @@
                             // Optionally, close the pop-up after submission
                             popup.style.display = 'none';
                             document.body.style.overflow = 'auto';
-                            // Adjust focus as needed, e.g., to the settings button
-                            // document.getElementById('theme-toggle-button').focus();
                         } else {
                             alert('Please enter a valid URL.');
                         }
@@ -243,8 +240,6 @@
                 popup.style.display = 'none';
                 // Re-enable background scrolling when pop-up is closed
                 document.body.style.overflow = 'auto';
-                // Return focus to the last focused element or a default element
-                // Implement as needed
             }
         });
 
@@ -255,8 +250,6 @@
                 popup.style.display = 'none';
                 // Re-enable background scrolling when pop-up is closed
                 document.body.style.overflow = 'auto';
-                // Return focus to the last focused element or a default element
-                // Implement as needed
             }
         });
 
@@ -267,25 +260,45 @@
 
             // Handle file upload input
             const uploadInput = document.getElementById('upload-input');
+            const successMessage = document.getElementById('success-message');
+            const errorMessage = document.getElementById('error-message');
+            const processingMessage = document.getElementById('processing-message');
+            const resultOutput = document.getElementById('result-output');
 
             uploadInput.addEventListener('change', function() {
                 const file = this.files[0];
                 if (file) {
-                    // Example: Display the selected file name
-                    alert(`Selected file: ${file.name}`);
-                    // Implement further file handling as needed
+                    // Validate file type
+                    const allowedExtensions = ['.yaml', '.yml', '.unity'];
+                    const fileName = file.name.toLowerCase();
+                    const isValidExtension = allowedExtensions.some(ext => fileName.endsWith(ext));
+
+                    if (!isValidExtension) {
+                        displayError('Invalid file type. Please upload a YAML or Unity file.');
+                        // Clear the file input
+                        this.value = '';
+                        clearSuccess();
+                        resultOutput.innerText = '';
+                    } else {
+                        // Display success message
+                        displaySuccess(`File '${file.name}' uploaded successfully.`);
+                        // Clear any error messages
+                        clearError();
+                    }
+                } else {
+                    // No file selected
+                    clearSuccess();
                 }
             });
 
             // Handle Send Button Click
             const sendButton = document.getElementById('search-button');
             const searchInput = document.getElementById('search-input');
-            const resultOutput = document.getElementById('result-output');
-            const errorMessage = document.getElementById('error-message'); // Reference to error message div
-            const processingMessage = document.getElementById('processing-message'); // Reference to processing message div
+            const fileInput = document.getElementById('upload-input');
 
             sendButton.addEventListener('click', function(){
                 const userInput = searchInput.value.trim();
+                const file = fileInput.files[0];
 
                 // Client-side Input Validation
                 if(userInput === "") {
@@ -297,24 +310,41 @@
                     return;
                 }
 
-                // Clear previous error messages
+                if (!file) {
+                    displayError('Please upload a YAML or Unity file.');
+                    return;
+                }
+
+                // Validate file type
+                const allowedExtensions = ['.yaml', '.yml', '.unity'];
+                const fileName = file.name.toLowerCase();
+                const isValidExtension = allowedExtensions.some(ext => fileName.endsWith(ext));
+
+                if (!isValidExtension) {
+                    displayError('Invalid file type. Please upload a YAML or Unity file.');
+                    return;
+                }
+
+                // Clear previous messages
                 clearError();
+                clearSuccess();
 
                 // Show Processing Message
                 showProcessing();
 
                 // Disable the send button to prevent multiple requests
                 sendButton.disabled = true;
-                // Removed text change to 'Sending...'
                 processingMessage.style.display = 'flex';
+
+                // Create FormData
+                const formData = new FormData();
+                formData.append('prompt', userInput);
+                formData.append('file', file);
 
                 // Send the input to the Flask backend via Fetch API
                 fetch('/submit', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ prompt: userInput })
+                    body: formData
                 })
                 .then(response => {
                     if (!response.ok) {
@@ -330,15 +360,8 @@
                         displayError(data.error);
                         resultOutput.innerText = '';
                     } else {
-                        // Display only the 'answer' content as plain text
-                        if (typeof data.answer === 'string') {
-                            // Display the answer as plain text
-                            resultOutput.innerText = data.answer;
-                        } else {
-                            // If 'answer' is an object, stringify it
-                            const jsonString = JSON.stringify(data.answer, null, 2);
-                            resultOutput.innerText = jsonString;
-                        }
+                        // Display the answer as plain text
+                        resultOutput.innerText = data.answer;
                     }
                 })
                 .catch((error) => {
@@ -349,9 +372,12 @@
                 .finally(() => {
                     // Re-enable the send button
                     sendButton.disabled = false;
-                    // Removed text change back to 'Send'
                     // Hide Processing Message
                     hideProcessing();
+                    // Clear the file input
+                    fileInput.value = '';
+                    // Clear the success message
+                    clearSuccess();
                 });
 
                 // Clear the input field
@@ -370,8 +396,9 @@
             function displayError(message) {
                 errorMessage.innerHTML = `<i class="fas fa-exclamation-triangle"></i> ${message}`;
                 errorMessage.style.display = 'flex';
-                // Ensure processing message is hidden
+                // Ensure other messages are hidden
                 hideProcessing();
+                clearSuccess();
             }
 
             // Function to Clear Error Messages
@@ -383,11 +410,28 @@
             // Function to Show Processing Message
             function showProcessing() {
                 processingMessage.style.display = 'flex';
+                clearError();
+                clearSuccess();
             }
 
             // Function to Hide Processing Message
             function hideProcessing() {
                 processingMessage.style.display = 'none';
+            }
+
+            // Function to Display Success Messages
+            function displaySuccess(message) {
+                successMessage.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+                successMessage.style.display = 'flex';
+                // Ensure other messages are hidden
+                hideProcessing();
+                clearError();
+            }
+
+            // Function to Clear Success Messages
+            function clearSuccess() {
+                successMessage.innerHTML = '';
+                successMessage.style.display = 'none';
             }
 
             // Function to Validate URL (Basic Validation)
@@ -433,8 +477,6 @@
                     // Close the pop-up
                     element.style.display = 'none';
                     document.body.style.overflow = 'auto';
-                    // Return focus to the last focused element or a default element
-                    // Implement as needed
                 }
             });
 

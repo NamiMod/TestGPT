@@ -1,12 +1,11 @@
-# app.py
-
 from flask import Flask, render_template, request, jsonify
 import os
 import json
 import logging
 from openai import OpenAI
 
-client = client = OpenAI(api_key="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")  # Consider using environment variables for API keys
+# Initialize OpenAI client using environment variable for API key
+client = OpenAI(api_key="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")
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -46,15 +45,16 @@ def is_test_generation_prompt(prompt):
         # In case of error, default to False to prevent unintended processing
         return False
 
-def generate_test(prompt):
+def generate_test(prompt, file_content):
     """
-    Generates a test scenario based on the provided prompt.
+    Generates a test scenario based on the provided prompt and file content.
     Returns a dictionary with 'answer'.
     """
-    system_message = "You are ChatGPT, a large language model trained by OpenAI."
+    system_message = "You are an AI assistant that generates test scenarios based on the user's description and the provided file content."
     user_message = (
-        f"Please generate a test scenario based on the following description.\n\n"
+        f"Please generate a test scenario based on the following description and the provided file content.\n\n"
         f"Description: {prompt}\n\n"
+        f"File Content:\n{file_content}\n\n"
         f"Provide your response as plain text."
     )
 
@@ -86,21 +86,40 @@ def home():
     """
     Renders the home page.
     """
-    return render_template('index.html')  # Removed 'result' and 'title' as frontend handles it
+    return render_template('index.html')
 
 @app.route('/submit', methods=['POST'])
 def submit():
     """
-    Handles the submission of prompts to generate tests.
-    Expects JSON data with a 'prompt' field.
+    Handles the submission of prompts and files to generate tests.
+    Expects 'prompt' and 'file' in form data.
     Returns JSON with 'answer'.
     """
     try:
-        # Parse JSON data from the request
-        data = request.get_json()
-        prompt = data.get('prompt', '').strip()
+        # Get prompt
+        prompt = request.form.get('prompt', '').strip()
+
+        # Get file
+        if 'file' not in request.files or request.files['file'].filename == '':
+            logger.warning("No file provided.")
+            return jsonify({'error': 'Please upload a YAML or Unity file.'}), 400
+        file = request.files['file']
+
+        # Check if file is YAML or Unity file
+        filename = file.filename
+        if not filename.lower().endswith(('.yaml', '.yml', '.unity')):
+            logger.warning("Invalid file type.")
+            return jsonify({'error': 'Please upload a YAML or Unity file.'}), 400
+
+        # Read file content
+        try:
+            file_content = file.read().decode('utf-8')
+        except UnicodeDecodeError:
+            logger.warning("Unable to read file content.")
+            return jsonify({'error': 'Unable to read file content. Please ensure it is a valid YAML or Unity file.'}), 400
 
         logger.info(f"Received prompt: {prompt}")
+        logger.info(f"Received file: {filename}")
 
         # Server-side Input Validation
         if not prompt:
@@ -118,7 +137,7 @@ def submit():
             }), 400
 
         # Step 2: Generate the test
-        test_result = generate_test(prompt)
+        test_result = generate_test(prompt, file_content)
         return jsonify(test_result)
 
     except Exception as e:
