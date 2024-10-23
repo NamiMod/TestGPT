@@ -1,6 +1,7 @@
 /* static/css/style.css */
 
 /* Reset and Basic Styles */
+/* (Styles remain the same) */
 * {
   margin: 0;
   padding: 0;
@@ -196,7 +197,7 @@ body {
 }
 
 .input-section input {
-  flex: 2 1 400px; /* Increased flex-grow to make input wider */
+  flex: 3 1 300px; /* Increased flex-grow to make input wider */
   padding: 10px; /* Reverted from 0.625rem to 10px */
   background-color: #1E1E1E;
   border: none;
@@ -212,17 +213,21 @@ body {
 }
 
 .input-section button {
-  padding: 8px 14px; /* Reduced padding to make Send button smaller */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 16px;
   background-color: #7FFF00;
   color: #1E1E1E;
   border: none;
   border-radius: 5px;
   font-weight: bold;
   cursor: pointer;
-  font-size: 14px; /* Reduced font size */
+  font-size: 16px;
   transition: background-color 0.3s ease, color 0.3s ease;
-  /* Removed margin: 5px 5px 5px 0; */
-  max-width: 100px; /* Set a max-width to control button size */
+  max-width: 150px;
+  width: 100%;
 }
 
 .input-section button:hover,
@@ -243,35 +248,34 @@ body {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 8px 16px; /* Reduced padding from 10px 20px to 8px 16px */
-  background-color: #7FFF00; /* Same as other buttons */
+  padding: 8px 16px;
+  background-color: #7FFF00;
   color: #1E1E1E;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 16px; /* Reverted from 1rem to 16px */
-  font-weight: bold; /* Match Send button */
+  font-size: 16px;
+  font-weight: bold;
   transition: background-color 0.3s ease, color 0.3s ease;
-  /* Removed margin-left: 10px; */
-  max-width: 150px; /* Optional: Set a max-width */
-  width: 100%; /* Ensures responsiveness */
+  max-width: 150px;
+  width: 100%;
 }
 
 .upload-button:hover,
 .upload-button:focus {
-  background-color: #428202; /* Darker green on hover */
+  background-color: #428202;
   color: #FFFFFF;
   outline: none;
 }
 
 .upload-button i {
-  font-size: 18px; /* Reverted from 1.125rem to 18px */
+  font-size: 18px;
   transition: transform 0.3s ease;
 }
 
 .upload-button:hover i,
 .upload-button:focus i {
-  transform: rotate(20deg); /* Slight rotation on hover for effect */
+  transform: rotate(20deg);
 }
 
 /* Link to GitHub/GitLab Button Styles */
@@ -280,36 +284,36 @@ body {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 8px 16px; /* Reduced padding from 10px 20px to 8px 16px */
-  background-color: #7FFF00; /* Same as other buttons */
+  padding: 8px 16px;
+  background-color: #7FFF00;
   color: #1E1E1E;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 16px; /* Reverted from 1rem to 16px */
-  font-weight: bold; /* Match Send button */
+  font-size: 16px;
+  font-weight: bold;
   transition: background-color 0.3s ease, color 0.3s ease;
-  /* Removed margin-left: 10px; */
-  max-width: 150px; /* Optional: Set a max-width */
-  width: 100%; /* Ensures responsiveness */
+  max-width: 150px;
+  width: 100%;
 }
 
 .link-button:hover,
 .link-button:focus {
-  background-color: #428202; /* Darker green on hover */
+  background-color: #428202;
   color: #FFFFFF;
   outline: none;
 }
 
 .link-button i {
-  font-size: 18px; /* Reverted from 1.125rem to 18px */
+  font-size: 18px;
   transition: transform 0.3s ease;
 }
 
 .link-button:hover i,
 .link-button:focus i {
-  transform: rotate(20deg); /* Slight rotation on hover for effect */
+  transform: rotate(20deg);
 }
+
 
 /* Pop-up Styles */
 .popup {
@@ -774,6 +778,7 @@ body.light-mode .popup-content a:focus {
   .settings-table td {
     padding: 5px; /* Reverted from 0.3125rem to 5px */
   }
+  
 }
 
 /* Tablets */
@@ -840,7 +845,7 @@ body.light-mode .popup-content a:focus {
   }
 
   .input-section input {
-    flex: 2 1 200px; /* Ensure input remains wider */
+    flex: 2 1 300px; /* Ensure input remains wider */
     font-size: 13px; /* Reverted from 0.85rem to 13px */
     padding: 10px; /* 0.65rem to 10px */
   }

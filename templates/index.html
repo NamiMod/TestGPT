@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- (Head content remains the same) -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TestGPT</title>
@@ -304,7 +305,7 @@
 
                 // Disable the send button to prevent multiple requests
                 sendButton.disabled = true;
-                sendButton.textContent = 'Sending...';
+                // Removed text change to 'Sending...'
                 processingMessage.style.display = 'flex';
 
                 // Send the input to the Flask backend via Fetch API
@@ -348,7 +349,7 @@
                 .finally(() => {
                     // Re-enable the send button
                     sendButton.disabled = false;
-                    sendButton.textContent = 'Send';
+                    // Removed text change back to 'Send'
                     // Hide Processing Message
                     hideProcessing();
                 });

@@ -106,9 +106,9 @@ def submit():
         if not prompt:
             logger.warning("No prompt provided.")
             return jsonify({'error': 'No prompt provided.'}), 400
-        if len(prompt) > 2000:
+        if len(prompt) > 4000:
             logger.warning("Prompt is too long.")
-            return jsonify({'error': 'Prompt is too long. Please limit to 2000 characters.'}), 400
+            return jsonify({'error': 'Prompt is too long. Please limit to 4000 characters.'}), 400
 
         # Step 1: Check if the prompt is related to test generation
         if not is_test_generation_prompt(prompt):
