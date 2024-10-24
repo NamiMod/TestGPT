@@ -1,33 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <!-- Head content remains the same -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TestGPT</title>
-    <!-- Font Awesome CDN for Icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-      integrity="sha512-pVnHzhb6aGF6A63UVjgKkV9iYvn8e3vVJ3N8j3qVnjbAX+Mx6bX+1p4UujqK3UVb4yBi3+hLQK6jzOvceTf3Yg=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <!-- Highlight.js CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <!-- Highlight.js Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-    <!-- Marked.js Library for Markdown Parsing -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
-    <!-- Initialize Highlight.js -->
-    <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            hljs.highlightAll();
-        });
-    </script>
-</head>
+    <head>
+        <!-- Head content remains the same -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>TestGPT</title>
+        <!-- Font Awesome CDN for Icons -->
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          integrity="sha512-pVnHzhb6aGF6A63UVjgKkV9iYvn8e3vVJ3N8j3qVnjbAX+Mx6bX+1p4UujqK3UVb4yBi3+hLQK6jzOvceTf3Yg=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer"
+        />
+        <!-- Highlight.js CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css">
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <!-- Highlight.js Library -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <!-- Marked.js Library for Markdown Parsing -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+        <!-- Initialize Highlight.js -->
+        <script>
+            document.addEventListener('DOMContentLoaded', (event) => {
+                hljs.highlightAll();
+            });
+        </script>
+    </head>
 <body>
     <div class="container">
         <!-- Sidebar -->
@@ -46,7 +46,7 @@
 
             <div class="profile-card">
                 <div class="profile">
-                    <img src="{{ url_for('static', filename='i1.png') }}" alt="Profile Picture">
+                    <img src="i1.png" alt="Profile Picture">
                     <p>Version 1.0</p>
                 </div>
             </div>
@@ -159,10 +159,8 @@
                 if (popupType === 'help') {
                     popupText.innerHTML = `<h2>Getting Started</h2>
                         <p style="text-align: justify;">Welcome to TestGPT, your intelligent solution for automating test creation based on the Arium test automation framework. Whether you're a developer, QA engineer, or tester, our application simplifies the process of generating comprehensive tests tailored to your specific needs. Begin by uploading a scene file in YAML format or by linking a public repository containing your project’s YAML files. This flexibility ensures that you can seamlessly integrate your existing workflows and data sources with our platform.</p>
-                        <br/><br/><br/>
                         <h2>Uploading and Linking Your Scene Files</h2>
                         <p style="text-align: justify;">To get started, navigate to the Upload section of the application. Here, you can select and upload your YAML file. Once uploaded, our system will automatically parse the YAML files to extract detailed information about the objects within your scene. You can also link a public repository instead.</p>
-                        <br/><br/><br/>
                         <h2>Describing Test Scenarios and Generating Tests</h2>
                         <p style="text-align: justify;">After successfully uploading your scene files or linking to a public repository, you can type your test description. Here, you can describe the specific scenarios you wish to test, detailing the expected behaviors and outcomes. Our application leverages the power of ChatGPT to analyze both the extracted scene information and your described scenarios to generate robust and meaningful tests.</p>`;
                 } else if (popupType === 'settings') {
@@ -192,7 +190,7 @@
                     // Set up the theme toggle button within the popup after content is inserted
                     setupThemeToggleButton();
                 } else if (popupType === 'about') {
-                    popupText.innerHTML = `<h2>TestGPT</h2>
+                    popupText.innerHTML = `<h2>About TestGPT</h2>
                         <p style="text-align: justify;">TestGPT has been developed as a Master's Thesis at the <a href="https://www.ucalgary.ca" target="_blank">University of Calgary</a> in 2024 at the <a href="https://seriousxr.ca" target="_blank">SEER Lab</a>. This thesis was initiated with the goal of improving testing for XR applications. To report any bugs or problems with TestGPT or for any other inquiries, please email the developer of TestGPT at <a href="mailto:seyednami.modarressi@ucalgary.ca">seyednami.modarressi@ucalgary.ca</a>.</p>`;
                 } else if (popupType === 'link') {
                     popupText.innerHTML = `
@@ -255,9 +253,6 @@
 
         // Theme Toggle Functionality Initialization on Page Load
         document.addEventListener('DOMContentLoaded', function () {
-            // Initial setup if theme-toggle-button exists on the main page (currently removed)
-            setupThemeToggleButton();
-
             // Handle file upload input
             const uploadInput = document.getElementById('upload-input');
             const successMessage = document.getElementById('success-message');

@@ -27,12 +27,157 @@ body {
   100% { opacity: 1; }
 }
 
-*,
-*::before,
-*::after {
+*, *::before, *::after {
   box-sizing: border-box;
 }
 
+/* Light Mode Styles */
+body.light-mode {
+  background-color: #FFFFFF;
+  color: #000000;
+}
+
+/* Update colors for light mode */
+body.light-mode .sidebar {
+  background-color: #F0F0F0;
+}
+
+body.light-mode .sidebar .logo h1 {
+  color: #006400;
+}
+
+body.light-mode .menu ul li a {
+  color: inherit;
+}
+
+body.light-mode .menu ul li a:hover,
+body.light-mode .menu ul li a:focus {
+  color: #006400;
+}
+
+body.light-mode .profile-card {
+  background-color: #E0E0E0;
+}
+
+body.light-mode .results-area {
+  background-color: #F0F0F0;
+}
+
+body.light-mode .results-area hr {
+  background: #006400;
+}
+
+body.light-mode .result-output {
+  background-color: #FFFFFF;
+  color: #000000;
+}
+
+body.light-mode .result-output:focus {
+  background-color: #E0E0E0;
+}
+
+body.light-mode .input-section {
+  background-color: #F0F0F0;
+}
+
+body.light-mode .input-section input {
+  background-color: #FFFFFF;
+  color: #000000;
+}
+
+body.light-mode .input-section input:focus {
+  background-color: #E0E0E0;
+}
+
+body.light-mode .input-section button,
+body.light-mode .upload-button,
+body.light-mode .link-button {
+  background-color: #006400;
+  color: #FFFFFF;
+}
+
+body.light-mode .input-section button:hover,
+body.light-mode .input-section button:focus,
+body.light-mode .upload-button:hover,
+body.light-mode .upload-button:focus,
+body.light-mode .link-button:hover,
+body.light-mode .link-button:focus {
+  background-color: #004d00;
+  color: #FFFFFF;
+}
+
+body.light-mode .popup {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+body.light-mode .popup-content {
+  background-color: #FFFFFF;
+  color: #000000;
+}
+
+body.light-mode .popup-content h2,
+body.light-mode .popup-content p {
+  color: #000000;
+}
+
+body.light-mode .popup-content .close {
+  color: #555555;
+}
+
+body.light-mode .popup-content .close:hover,
+body.light-mode .popup-content .close:focus {
+  color: #000000;
+}
+
+body.light-mode .popup-content input[type="url"] {
+  background-color: #FFFFFF;
+  color: #000000;
+}
+
+body.light-mode .popup-content input[type="url"]:focus {
+  background-color: #E0E0E0;
+}
+
+body.light-mode .popup-content #submit-link-button {
+  background-color: #006400;
+  color: #FFFFFF;
+}
+
+body.light-mode .popup-content #submit-link-button:hover,
+body.light-mode .popup-content #submit-link-button:focus {
+  background-color: #004d00;
+  color: #FFFFFF;
+}
+
+/* Update message styles for light mode */
+body.light-mode .success-message {
+  background-color: #c3e6cb;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+body.light-mode .error-message {
+  background-color: #f5c6cb;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+body.light-mode .processing-message {
+  background-color: #ffeeba;
+  color: #856404;
+  border: 1px solid #ffeeba;
+}
+
+/* Update scrollbar for light mode */
+body.light-mode .results-area::-webkit-scrollbar-track {
+  background: #FFFFFF;
+}
+
+body.light-mode .results-area::-webkit-scrollbar-thumb {
+  background-color: #006400;
+}
+
+/* Continue with your existing styles */
 /* Container Styles */
 .container {
   display: flex;
@@ -129,6 +274,7 @@ body {
   display: flex;
   flex-direction: column;
 }
+
 .results-area h3 {
   margin-bottom: 10px;
   color: #7FFF00;
@@ -463,23 +609,10 @@ body.light-mode .popup-button:focus {
   text-align: left;
 }
 
-/* Light Mode Overrides for Submit Button */
-body.light-mode .popup-content #submit-link-button {
-  background-color: #006400;
-  color: #FFFFFF;
-}
-
-body.light-mode .popup-content #submit-link-button:hover,
-body.light-mode .popup-content #submit-link-button:focus {
-  background-color: #004d00;
-  color: #FFFFFF;
-  outline: none;
-}
-
 /* Success Message Styles */
 .success-message {
-    background-color: #d4edda; /* Light green background */
-    color: #155724; /* Dark green text */
+    background-color: #d4edda;
+    color: #155724;
     padding: 15px;
     border: 1px solid #c3e6cb;
     border-radius: 5px;
@@ -491,12 +624,6 @@ body.light-mode .popup-content #submit-link-button:focus {
 .success-message i {
     margin-right: 10px;
     color: #155724;
-}
-
-body.light-mode .success-message {
-    background-color: #c3e6cb; /* Light green background in light mode */
-    color: #155724;
-    border: 1px solid #c3e6cb;
 }
 
 /* Error Message Styles */
@@ -516,12 +643,6 @@ body.light-mode .success-message {
     color: #721c24;
 }
 
-body.light-mode .error-message {
-    background-color: #f5c6cb;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
-}
-
 /* Processing Message Styles */
 .processing-message {
     background-color: #fff3cd;
@@ -537,12 +658,6 @@ body.light-mode .error-message {
 .processing-message i {
     margin-right: 10px;
     color: #856404;
-}
-
-body.light-mode .processing-message {
-    background-color: #ffeeba;
-    color: #856404;
-    border: 1px solid #ffeeba;
 }
 
 /* New Styles for Links in Pop-ups */
@@ -580,6 +695,14 @@ body.light-mode .popup-content a:focus {
 .results-area::-webkit-scrollbar-thumb {
   background-color: #7FFF00;
   border-radius: 4px;
+}
+
+body.light-mode .results-area::-webkit-scrollbar-track {
+  background: #FFFFFF;
+}
+
+body.light-mode .results-area::-webkit-scrollbar-thumb {
+  background-color: #006400;
 }
 
 /* Responsive Design */
